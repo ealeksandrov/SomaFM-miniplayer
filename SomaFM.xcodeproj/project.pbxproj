@@ -1,0 +1,393 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		558AD6CE1F82BF63000013B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 558AD6CA1F82BF34000013B1 /* Assets.xcassets */; };
+		558AD6CF1F82BF69000013B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 558AD6C81F82BF34000013B1 /* Main.storyboard */; };
+		558AD6D11F82BF6F000013B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558AD6C51F82BF2F000013B1 /* AppDelegate.swift */; };
+		558AD6D81F82C116000013B1 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558AD6D71F82C114000013B1 /* Log.swift */; };
+		558AD6D91F82C119000013B1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558AD6D51F82C114000013B1 /* ViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		558AD6B01F82BDD1000013B1 /* SomaFM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SomaFM.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		558AD6C51F82BF2F000013B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		558AD6C91F82BF34000013B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		558AD6CA1F82BF34000013B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		558AD6CC1F82BF34000013B1 /* SomaFM.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SomaFM.entitlements; sourceTree = "<group>"; };
+		558AD6CD1F82BF34000013B1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		558AD6D51F82C114000013B1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		558AD6D71F82C114000013B1 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		558AD6AD1F82BDD1000013B1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		558AD6A71F82BDD1000013B1 = {
+			isa = PBXGroup;
+			children = (
+				558AD6C31F82BF2F000013B1 /* Source */,
+				558AD6C61F82BF34000013B1 /* Resources */,
+				558AD6CB1F82BF34000013B1 /* Supporting-files */,
+				558AD6B11F82BDD1000013B1 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		558AD6B11F82BDD1000013B1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				558AD6B01F82BDD1000013B1 /* SomaFM.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		558AD6C31F82BF2F000013B1 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				558AD6D61F82C114000013B1 /* Utils */,
+				558AD6D41F82C114000013B1 /* ViewControllers */,
+				558AD6C51F82BF2F000013B1 /* AppDelegate.swift */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		558AD6C61F82BF34000013B1 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				558AD6C71F82BF34000013B1 /* Storyboards */,
+				558AD6CA1F82BF34000013B1 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		558AD6C71F82BF34000013B1 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				558AD6C81F82BF34000013B1 /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		558AD6CB1F82BF34000013B1 /* Supporting-files */ = {
+			isa = PBXGroup;
+			children = (
+				558AD6CC1F82BF34000013B1 /* SomaFM.entitlements */,
+				558AD6CD1F82BF34000013B1 /* Info.plist */,
+			);
+			path = "Supporting-files";
+			sourceTree = "<group>";
+		};
+		558AD6D41F82C114000013B1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				558AD6D51F82C114000013B1 /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		558AD6D61F82C114000013B1 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				558AD6D71F82C114000013B1 /* Log.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		558AD6AF1F82BDD1000013B1 /* SomaFM */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 558AD6C01F82BDD1000013B1 /* Build configuration list for PBXNativeTarget "SomaFM" */;
+			buildPhases = (
+				558AD6AC1F82BDD1000013B1 /* Sources */,
+				558AD6AD1F82BDD1000013B1 /* Frameworks */,
+				558AD6AE1F82BDD1000013B1 /* Resources */,
+				558AD6D21F82C077000013B1 /* ShellScript */,
+				558AD6D31F82C09D000013B1 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SomaFM;
+			productName = SomaFM;
+			productReference = 558AD6B01F82BDD1000013B1 /* SomaFM.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		558AD6A81F82BDD1000013B1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0900;
+				LastUpgradeCheck = 0900;
+				ORGANIZATIONNAME = "Evgeny Aleksandrov";
+				TargetAttributes = {
+					558AD6AF1F82BDD1000013B1 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 558AD6AB1F82BDD1000013B1 /* Build configuration list for PBXProject "SomaFM" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 558AD6A71F82BDD1000013B1;
+			productRefGroup = 558AD6B11F82BDD1000013B1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				558AD6AF1F82BDD1000013B1 /* SomaFM */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		558AD6AE1F82BDD1000013B1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				558AD6CE1F82BF63000013B1 /* Assets.xcassets in Resources */,
+				558AD6CF1F82BF69000013B1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		558AD6D21F82C077000013B1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "git=`sh /etc/profile; which git`\nbranch=`${git} rev-parse --abbrev-ref HEAD`\ncommits_count=`${git} rev-list ${branch} | wc -l  | tr -d ' '`\n\nfilepath=\"${BUILT_PRODUCTS_DIR}/${INFOPLIST_PATH}\"\n\necho \"Updating ${filepath}\"\necho \"Current version build ${commits_count}\"\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion ${commits_count}\" \"${filepath}\"";
+		};
+		558AD6D31F82C09D000013B1 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		558AD6AC1F82BDD1000013B1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				558AD6D91F82C119000013B1 /* ViewController.swift in Sources */,
+				558AD6D81F82C116000013B1 /* Log.swift in Sources */,
+				558AD6D11F82BF6F000013B1 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		558AD6C81F82BF34000013B1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				558AD6C91F82BF34000013B1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		558AD6BE1F82BDD1000013B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		558AD6BF1F82BDD1000013B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+			};
+			name = Release;
+		};
+		558AD6C11F82BDD1000013B1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Supporting-files/SomaFM.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5567X9EQ9Q;
+				INFOPLIST_FILE = "Supporting-files/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ealeksandrov.somafm;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		558AD6C21F82BDD1000013B1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Supporting-files/SomaFM.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5567X9EQ9Q;
+				INFOPLIST_FILE = "Supporting-files/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.ealeksandrov.somafm;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		558AD6AB1F82BDD1000013B1 /* Build configuration list for PBXProject "SomaFM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				558AD6BE1F82BDD1000013B1 /* Debug */,
+				558AD6BF1F82BDD1000013B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		558AD6C01F82BDD1000013B1 /* Build configuration list for PBXNativeTarget "SomaFM" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				558AD6C11F82BDD1000013B1 /* Debug */,
+				558AD6C21F82BDD1000013B1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 558AD6A81F82BDD1000013B1 /* Project object */;
+}

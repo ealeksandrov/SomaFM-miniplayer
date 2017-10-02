@@ -1,0 +1,6 @@
+disabled_rules:
+  - superfluous_disable_command
+line_length: 160
+identifier_name:
+  excluded:
+    - id
