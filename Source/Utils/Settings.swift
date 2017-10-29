@@ -7,6 +7,7 @@ import Foundation
 
 enum UserDefaultsKey {
     static let volume = "RadioPlayer.Volume"
+    static let lastPlayedChannel = "RadioPlayer.Channel.LastPlayed"
     static let apiCacheTimestamp = "SomaAPI.Cache.Timestamp"
 }
 
@@ -26,6 +27,15 @@ struct Settings {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaultsKey.apiCacheTimestamp)
+        }
+    }
+
+    static var lastPlayedChannelId: String {
+        get {
+            return UserDefaults.standard.object(forKey: UserDefaultsKey.lastPlayedChannel) as? String ?? "groovesalad"
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKey.lastPlayedChannel)
         }
     }
 }

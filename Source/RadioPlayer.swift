@@ -31,6 +31,8 @@ struct RadioPlayer {
     private static var timeControlStatusToken: NSKeyValueObservation?
 
     static func play(channel: Channel) {
+        Settings.lastPlayedChannelId = channel.id
+
         if let firstPlaylist = channel.bestQualityPlaylist {
             let playerItem = AVPlayerItem(url: firstPlaylist.url)
             currentTrack = nil

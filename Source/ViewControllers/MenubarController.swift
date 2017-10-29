@@ -82,10 +82,17 @@ class MenubarController {
             return
         }
 
+        let lastPlayedChannel = SomaAPI.lastPlayedChannel
+
         for (index, channel) in channels.enumerated() {
             let channelItem = NSMenuItem(title: channel.title, action: #selector(MenubarController.selectStation(_:)), keyEquivalent: "")
             channelItem.tag = index
             channelItem.target = self
+
+            if channel.id == lastPlayedChannel?.id {
+                channelItem.state = .on
+            }
+
             stationsMenu.addItem(channelItem)
         }
     }
@@ -101,12 +108,7 @@ class MenubarController {
     @objc func selectStation(_ sender: NSMenuItem) {
         guard let channels = SomaAPI.channels, channels.count > sender.tag else { return }
 
-        stationsMenu.items.forEach { $0.state = .off }
-        sender.state = .on
-
-        let channel = channels[sender.tag]
-        RadioPlayer.play(channel: channel)
-        Log.info("Selected station \"\(channel.title)\"")
+        selectChannel(channels[sender.tag])
     }
 
     @objc func updateVolume(_ sender: NSSlider) {
@@ -119,13 +121,26 @@ class MenubarController {
 
     // MARK: - Private
 
+    func selectChannel(_ channel: Channel) {
+        guard let channels = SomaAPI.channels, let selectedChannelIdx = channels.index(where: { $0.id == channel.id }) else { return }
+
+        stationsMenu.items.forEach { $0.state = $0.tag == selectedChannelIdx ? .on : .off }
+
+        RadioPlayer.play(channel: channel)
+        Log.info("Selected station \"\(channel.title)\"")
+    }
+
     func showMenu() {
         statusItem.popUpMenu(rightClickMenu)
     }
 
     func togglePlay() {
-        if RadioPlayer.player.timeControlStatus == .paused && RadioPlayer.player.currentItem != nil {
-            RadioPlayer.player.play()
+        if RadioPlayer.player.timeControlStatus == .paused {
+            if RadioPlayer.player.currentItem != nil {
+                RadioPlayer.player.play()
+            } else if let savedChannel = SomaAPI.lastPlayedChannel {
+                selectChannel(savedChannel)
+            }
         } else {
             RadioPlayer.player.pause()
         }

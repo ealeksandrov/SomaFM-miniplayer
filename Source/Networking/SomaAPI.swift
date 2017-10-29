@@ -16,6 +16,11 @@ public struct SomaAPI {
         }
     }
 
+    static var lastPlayedChannel: Channel? {
+        let channelId = Settings.lastPlayedChannelId
+        return channels?.first(where: { $0.id == channelId })
+    }
+
     static func loadChannels() {
         getChannelsFromDisk()
         loadChannelsFromAPI()
