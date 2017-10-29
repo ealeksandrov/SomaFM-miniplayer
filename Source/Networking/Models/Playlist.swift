@@ -5,7 +5,7 @@
 
 import Foundation
 
-struct Playlist: Codable {
+public struct Playlist: Codable {
     enum Format: String, Codable {
         case aac
         case aacp

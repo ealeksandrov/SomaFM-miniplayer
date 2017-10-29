@@ -15,8 +15,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         Log.info("Starting \(AppDelegate.bundleId) v\(AppDelegate.bundleShortVersion) (\(AppDelegate.bundleVersion))")
 
-        SomaAPI.loadChannels { channelList in
-            _ = channelList?.channels.map { Log.info($0.title) }
-        }
+        SomaAPI.loadChannels()
     }
 }

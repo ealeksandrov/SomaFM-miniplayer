@@ -5,11 +5,7 @@
 
 import Foundation
 
-struct ChannelList: Codable {
-    let channels: [Channel]
-}
-
-struct Channel: Codable {
+public struct Channel: Codable {
     let id: String
     let title: String
     let description: String
