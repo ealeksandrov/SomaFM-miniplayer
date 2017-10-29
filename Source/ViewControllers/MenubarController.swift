@@ -14,13 +14,21 @@ class MenubarController {
     let trackItem = NSMenuItem(title: "Track", action: nil, keyEquivalent: "")
 
     init() {
-        statusItem.title = "►"
-        statusItem.toolTip = "Click to play/pause\nRight click to show menu"
-
+        setupStatusItem()
         setupMenu()
 
         NotificationCenter.default.addObserver(self, selector: #selector(MenubarController.updateStationsMenu), name: .somaApiChannelsUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MenubarController.updateTrackName), name: .radioPlayerTrackNameUpdated, object: nil)
+    }
+
+    func setupStatusItem() {
+        statusItem.title = "►"
+        statusItem.toolTip = "Click to play/pause\nRight click to show menu"
+        statusItem.highlightMode = false
+
+        statusItem.button?.target = self
+        statusItem.button?.action = #selector(MenubarController.toggleStatus(_:))
+        statusItem.button?.sendAction(on: [.leftMouseUp, .rightMouseUp])
     }
 
     func setupMenu() {
@@ -35,7 +43,6 @@ class MenubarController {
         rightClickMenu.addItem(stationsItem)
         rightClickMenu.addItem(NSMenuItem.separator())
         rightClickMenu.addItem(NSMenuItem(title: "Quit SomaFM", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
-        statusItem.menu = rightClickMenu
 
         updateStationsMenu()
     }
@@ -52,6 +59,30 @@ class MenubarController {
         container.addSubview(slider)
 
         return container
+    }
+
+    // MARK: - Actions
+
+    @objc func toggleStatus(_ sender: NSStatusBarButton) {
+        guard let event = NSApplication.shared.currentEvent else { return }
+
+        if event.modifierFlags.contains(.control) || event.modifierFlags.contains(.option) || event.type == .rightMouseUp {
+            showMenu()
+        } else {
+            togglePlay()
+        }
+    }
+
+    func showMenu() {
+        statusItem.popUpMenu(rightClickMenu)
+    }
+
+    func togglePlay() {
+        if RadioPlayer.player.timeControlStatus == .paused {
+            RadioPlayer.player.play()
+        } else {
+            RadioPlayer.player.pause()
+        }
     }
 
     @objc func updateStationsMenu() {
