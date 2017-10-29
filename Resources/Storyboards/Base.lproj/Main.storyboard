@@ -95,9 +95,59 @@
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="400" height="200"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="SI3-e1-D9B">
+                                <rect key="frame" x="18" y="164" width="104" height="18"/>
+                                <buttonCell key="cell" type="check" title="Start at Login" bezelStyle="regularSquare" imagePosition="left" inset="2" id="i30-gu-dVX">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                            </button>
+                            <button translatesAutoresizingMaskIntoConstraints="NO" id="gVp-ND-Gdb">
+                                <rect key="frame" x="18" y="109" width="114" height="18"/>
+                                <buttonCell key="cell" type="check" title="Play on Launch" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Lah-El-9l4">
+                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <binding destination="KYv-Wp-8ng" name="value" keyPath="values.RadioPlayer.ShouldPlayOnLaunch" id="i3X-Gg-oco"/>
+                                </connections>
+                            </button>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LfQ-DL-gam">
+                                <rect key="frame" x="18" y="90" width="245" height="16"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Immediately starts playing when launched." id="gFh-Zx-ZWH">
+                                    <font key="font" metaFont="system" size="12"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PmU-Zt-r8g">
+                                <rect key="frame" x="18" y="145" width="312" height="16"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Automatically opens the app when you start your Mac." id="Mdn-2A-S3Y">
+                                    <font key="font" metaFont="system" size="12"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                        </subviews>
+                        <constraints>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LfQ-DL-gam" secondAttribute="trailing" constant="20" id="44E-dd-4xN"/>
+                            <constraint firstItem="SI3-e1-D9B" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="4fX-fA-6uC"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SI3-e1-D9B" secondAttribute="trailing" constant="20" id="8QD-hb-vby"/>
+                            <constraint firstItem="SI3-e1-D9B" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="AzT-zs-ZkN"/>
+                            <constraint firstItem="LfQ-DL-gam" firstAttribute="leading" secondItem="SI3-e1-D9B" secondAttribute="leading" id="Mb6-hp-1KS"/>
+                            <constraint firstItem="PmU-Zt-r8g" firstAttribute="leading" secondItem="SI3-e1-D9B" secondAttribute="leading" id="RIP-QP-r5w"/>
+                            <constraint firstItem="PmU-Zt-r8g" firstAttribute="top" secondItem="SI3-e1-D9B" secondAttribute="bottom" constant="5" id="Z2e-n7-sLt"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gVp-ND-Gdb" secondAttribute="trailing" constant="20" id="bcn-hC-7N9"/>
+                            <constraint firstItem="LfQ-DL-gam" firstAttribute="top" secondItem="gVp-ND-Gdb" secondAttribute="bottom" constant="5" id="cxE-Dz-x6K"/>
+                            <constraint firstItem="gVp-ND-Gdb" firstAttribute="top" secondItem="PmU-Zt-r8g" secondAttribute="bottom" constant="20" id="iVs-DQ-UeZ"/>
+                            <constraint firstItem="gVp-ND-Gdb" firstAttribute="leading" secondItem="SI3-e1-D9B" secondAttribute="leading" id="mEW-i0-bwv"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PmU-Zt-r8g" secondAttribute="trailing" constant="20" id="wCc-Ho-4y6"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <userDefaultsController representsSharedInstance="YES" id="KYv-Wp-8ng"/>
             </objects>
             <point key="canvasLocation" x="75" y="655"/>
         </scene>
