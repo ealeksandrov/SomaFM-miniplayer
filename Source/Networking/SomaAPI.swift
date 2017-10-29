@@ -9,7 +9,7 @@ public extension Notification.Name {
     static let somaApiChannelsUpdated = Notification.Name("SomaAPI.Channels.Updated")
 }
 
-public class SomaAPI {
+public struct SomaAPI {
     static var channels: [Channel]? {
         didSet {
             NotificationCenter.default.post(name: .somaApiChannelsUpdated, object: nil)
@@ -17,11 +17,8 @@ public class SomaAPI {
     }
 
     static func loadChannels() {
-        channels = getChannelsFromDisk()
-        loadChannelsFromAPI { channels in
-            guard let channels = channels else { return }
-            self.channels = channels
-        }
+        getChannelsFromDisk()
+        loadChannelsFromAPI()
     }
 }
 
@@ -34,46 +31,51 @@ private extension SomaAPI {
 
     static let channelsURL = URL(string: "https://api.somafm.com/channels.json")!
 
-    static func loadChannelsFromAPI(completion: @escaping ([Channel]?) -> Void) {
+    static func loadChannelsFromAPI() {
         let session = URLSession(configuration: URLSessionConfiguration.default)
         let request = URLRequest(url: channelsURL)
 
         session.dataTask(with: request) { data, _, _ in
-            if let data = data, let channelList = try? JSONDecoder().decode(ChannelList.self, from: data) {
-                SomaAPI.saveChannelsToDisk(channelList.channels)
-                completion(channelList.channels)
-            } else {
-                completion(nil)
+            guard let data = data else { return }
+
+            do {
+                let channelList = try JSONDecoder().decode(ChannelList.self, from: data)
+                self.channels = channelList.channels
+                SomaAPI.saveChannelsToDisk()
+            } catch {
+                print("SomaAPI: Error loading channels from API")
             }
-            }.resume()
+        }.resume()
     }
 
     // MARK: - Persistence
 
-    static func getDocumentsURL() -> URL? {
-        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first
+    static func fileCacheURL() -> URL? {
+        return FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first?.appendingPathComponent("somafm_channels.json")
     }
 
-    static func saveChannelsToDisk(_ channels: [Channel]?) {
-        guard let channels = channels, let url = getDocumentsURL()?.appendingPathComponent("somafm_channels.json") else { return }
+    static func saveChannelsToDisk() {
+        guard let channelsToSave = self.channels,
+            let url = fileCacheURL() else { return }
 
         do {
-            let data = try JSONEncoder().encode(channels)
+            let data = try JSONEncoder().encode(channelsToSave)
             try data.write(to: url, options: [])
             UserDefaults.standard.set(1, forKey: "key")
         } catch {
-            print("Error saving channels to disk")
+            print("SomaAPI: Error saving channels to disk")
         }
     }
 
-    static func getChannelsFromDisk() -> [Channel]? {
-        guard let url = getDocumentsURL()?.appendingPathComponent("somafm_channels.json") else { return nil }
+    static func getChannelsFromDisk() {
+        guard let url = fileCacheURL() else { return }
 
-        if let data = try? Data(contentsOf: url, options: []),
-            let channels = try? JSONDecoder().decode([Channel].self, from: data) {
-            return channels
+        do {
+            let data = try Data(contentsOf: url, options: [])
+            let channelsToLoad = try JSONDecoder().decode([Channel].self, from: data)
+            self.channels = channelsToLoad
+        } catch {
+            print("SomaAPI: Error loading channels from disk")
         }
-
-        return nil
     }
 }
