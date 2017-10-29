@@ -54,6 +54,7 @@ class MenubarController {
         sender.state = .on
 
         let channel = channels[sender.tag]
+        RadioPlayer.play(channel: channel)
         Log.info("Selected station \"\(channel.title)\"")
     }
 }
