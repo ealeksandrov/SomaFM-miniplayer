@@ -8,6 +8,8 @@ import Cocoa
 @NSApplicationMain
 class AppDelegate: NSObject, NSApplicationDelegate {
 
+    let menubarController = MenubarController()
+
     static let bundleId: String = Bundle.main.bundleIdentifier ?? "unknown"
     static let bundleShortVersion: String = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? ""
     static let bundleVersion: String = Bundle.main.infoDictionary?["CFBundleVersion"] as? String ?? ""

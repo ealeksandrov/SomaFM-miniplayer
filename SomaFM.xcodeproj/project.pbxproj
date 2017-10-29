@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		556877981F83E33800F6B866 /* MenubarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556877971F83E33800F6B866 /* MenubarController.swift */; };
 		558AD6CE1F82BF63000013B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 558AD6CA1F82BF34000013B1 /* Assets.xcassets */; };
 		558AD6CF1F82BF69000013B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 558AD6C81F82BF34000013B1 /* Main.storyboard */; };
 		558AD6D11F82BF6F000013B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558AD6C51F82BF2F000013B1 /* AppDelegate.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		556877971F83E33800F6B866 /* MenubarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenubarController.swift; sourceTree = "<group>"; };
 		558AD6B01F82BDD1000013B1 /* SomaFM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SomaFM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		558AD6C51F82BF2F000013B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		558AD6C91F82BF34000013B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -101,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				558AD6D51F82C114000013B1 /* ViewController.swift */,
+				556877971F83E33800F6B866 /* MenubarController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -233,6 +236,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				556877981F83E33800F6B866 /* MenubarController.swift in Sources */,
 				55DB7F3C1F82CBF6009C3E0E /* SomaAPI.swift in Sources */,
 				558AD6D91F82C119000013B1 /* ViewController.swift in Sources */,
 				55DB7F381F82C488009C3E0E /* Channel.swift in Sources */,
