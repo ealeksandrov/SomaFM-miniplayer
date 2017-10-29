@@ -22,13 +22,13 @@ class MenubarController {
     }
 
     func setupStatusItem() {
-        statusItem.title = "►"
-        statusItem.toolTip = "Click to play/pause\nRight click to show menu"
         statusItem.highlightMode = false
 
         statusItem.button?.target = self
         statusItem.button?.action = #selector(MenubarController.toggleStatus(_:))
         statusItem.button?.sendAction(on: [.leftMouseUp, .rightMouseUp])
+
+        setStatusItem(playing: false)
     }
 
     func setupMenu() {
@@ -73,18 +73,6 @@ class MenubarController {
         }
     }
 
-    func showMenu() {
-        statusItem.popUpMenu(rightClickMenu)
-    }
-
-    func togglePlay() {
-        if RadioPlayer.player.timeControlStatus == .paused {
-            RadioPlayer.player.play()
-        } else {
-            RadioPlayer.player.pause()
-        }
-    }
-
     @objc func updateStationsMenu() {
         stationsMenu.removeAllItems()
 
@@ -121,6 +109,30 @@ class MenubarController {
 
         if sender.window?.currentEvent?.type == .leftMouseUp {
             Settings.volume = sender.floatValue
+        }
+    }
+
+    // MARK: - Private
+
+    func showMenu() {
+        statusItem.popUpMenu(rightClickMenu)
+    }
+
+    func togglePlay() {
+        if RadioPlayer.player.timeControlStatus == .paused && RadioPlayer.player.currentItem != nil {
+            RadioPlayer.player.play()
+        } else {
+            RadioPlayer.player.pause()
+        }
+    }
+
+    func setStatusItem(playing: Bool) {
+        if playing {
+            statusItem.button?.image = NSImage(named: NSImage.Name(rawValue: "media_pause"))
+            statusItem.toolTip = "Click to pause\nRight click to show menu"
+        } else {
+            statusItem.button?.image = NSImage(named: NSImage.Name(rawValue: "media_play"))
+            statusItem.toolTip = "Click to play\nRight click to show menu"
         }
     }
 }
