@@ -12,6 +12,7 @@ public extension Notification.Name {
 public struct SomaAPI {
     static var channels: [Channel]? {
         didSet {
+            print("SomaAPI: channels updated")
             NotificationCenter.default.post(name: .somaApiChannelsUpdated, object: nil)
         }
     }
@@ -32,6 +33,13 @@ private extension SomaAPI {
     static let channelsURL = URL(string: "https://api.somafm.com/channels.json")!
 
     static func loadChannelsFromAPI() {
+        if channels != nil,
+            let cacheTimestamp = UserDefaults.standard.object(forKey: "SomaAPI.Cache.Timestamp") as? Date,
+            Date().timeIntervalSince(cacheTimestamp) < 3*60 {
+            // channels are still fresh, do not update
+            return
+        }
+
         let session = URLSession(configuration: URLSessionConfiguration.default)
         let request = URLRequest(url: channelsURL)
 
@@ -61,7 +69,7 @@ private extension SomaAPI {
         do {
             let data = try JSONEncoder().encode(channelsToSave)
             try data.write(to: url, options: [])
-            UserDefaults.standard.set(1, forKey: "key")
+            UserDefaults.standard.set(Date(), forKey: "SomaAPI.Cache.Timestamp")
         } catch {
             print("SomaAPI: Error saving channels to disk")
         }
