@@ -113,7 +113,7 @@ class MenubarController {
     }
 
     @objc func updateTrackName() {
-        trackItem.title = RadioPlayer.currentTrack ?? "..."
+        trackItem.title = RadioPlayer.currentTrack?.trunc(length: 35) ?? "..."
         if Settings.notificationsEnabled {
             showUserNotification()
         }
