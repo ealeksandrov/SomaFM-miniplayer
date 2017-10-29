@@ -8,6 +8,7 @@ import Foundation
 enum UserDefaultsKey {
     static let volume = "RadioPlayer.Volume"
     static let lastPlayedChannel = "RadioPlayer.Channel.LastPlayed"
+    static let shouldPlayOnLaunch = "RadioPlayer.ShouldPlayOnLaunch"
     static let apiCacheTimestamp = "SomaAPI.Cache.Timestamp"
 }
 
@@ -36,6 +37,15 @@ struct Settings {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaultsKey.lastPlayedChannel)
+        }
+    }
+
+    static var shouldPlayOnLaunch: Bool {
+        get {
+            return UserDefaults.standard.object(forKey: UserDefaultsKey.shouldPlayOnLaunch) as? Bool ?? false
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKey.shouldPlayOnLaunch)
         }
     }
 }

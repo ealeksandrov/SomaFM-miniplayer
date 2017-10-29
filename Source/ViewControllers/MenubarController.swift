@@ -14,8 +14,14 @@ class MenubarController {
     let trackItem = NSMenuItem(title: "Track", action: nil, keyEquivalent: "")
 
     init() {
+        SomaAPI.loadChannels()
+
         setupStatusItem()
         setupMenu()
+
+        if Settings.shouldPlayOnLaunch {
+            togglePlay()
+        }
 
         NotificationCenter.default.addObserver(self, selector: #selector(MenubarController.updateStationsMenu), name: .somaApiChannelsUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MenubarController.updateTrackName), name: .radioPlayerTrackNameUpdated, object: nil)
