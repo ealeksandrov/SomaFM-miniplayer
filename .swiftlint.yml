@@ -4,3 +4,4 @@ line_length: 160
 identifier_name:
   excluded:
     - id
+    - dj
