@@ -17,7 +17,7 @@ public struct Channel: Codable {
     let xlimage: URL?
     let twitter: String
     let updated: String
-    let listeners: String
+    let listeners: Int
     let lastPlaying: String
 
     let playlists: [Playlist]
@@ -34,5 +34,29 @@ public struct Channel: Codable {
         } else {
             return nil
         }
+    }
+
+    public init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        self.id = try container.decode(String.self, forKey: .id)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.description = try container.decode(String.self, forKey: .title)
+        self.dj = try container.decode(String.self, forKey: .dj)
+        self.djmail = try container.decode(String.self, forKey: .djmail)
+        self.genre = try container.decode(String.self, forKey: .genre)
+        self.image = try container.decode(URL.self, forKey: .image)
+        self.largeimage = try? container.decode(URL.self, forKey: .largeimage)
+        self.xlimage = try? container.decode(URL.self, forKey: .xlimage)
+        self.twitter = try container.decode(String.self, forKey: .twitter)
+        self.updated = try container.decode(String.self, forKey: .updated)
+        if let listenersString = try? container.decode(String.self, forKey: .listeners) {
+            self.listeners = Int(listenersString) ?? 0
+        } else {
+            self.listeners = 0
+        }
+        self.lastPlaying = try container.decode(String.self, forKey: .lastPlaying)
+
+        self.playlists = try container.decode([Playlist].self, forKey: .playlists)
     }
 }
