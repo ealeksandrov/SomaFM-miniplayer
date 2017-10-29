@@ -11,16 +11,21 @@ class MenubarController {
     let rightClickMenu = NSMenu()
     let stationsMenu = NSMenu()
 
+    let trackItem = NSMenuItem(title: "Track", action: nil, keyEquivalent: "")
+
     init() {
-        statusItem.title = "SomaFM ►"
+        statusItem.title = "►"
         statusItem.toolTip = "Click to play/pause\nRight click to show menu"
 
         setupMenu()
 
         NotificationCenter.default.addObserver(self, selector: #selector(MenubarController.updateStationsMenu), name: .somaApiChannelsUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MenubarController.updateTrackName), name: .radioPlayerTrackNameUpdated, object: nil)
     }
 
     func setupMenu() {
+        rightClickMenu.addItem(trackItem)
+
         let stationsItem = NSMenuItem(title: "Stations", action: nil, keyEquivalent: "")
         stationsItem.submenu = stationsMenu
         rightClickMenu.addItem(stationsItem)
@@ -45,6 +50,10 @@ class MenubarController {
             channelItem.target = self
             stationsMenu.addItem(channelItem)
         }
+    }
+
+    @objc func updateTrackName() {
+        trackItem.title = RadioPlayer.currentTrack ?? "..."
     }
 
     @objc func selectStation(_ sender: NSMenuItem) {
