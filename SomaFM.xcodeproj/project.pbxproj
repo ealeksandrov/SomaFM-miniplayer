@@ -14,12 +14,28 @@
 		558AD6D81F82C116000013B1 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558AD6D71F82C114000013B1 /* Log.swift */; };
 		558AD6D91F82C119000013B1 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558AD6D51F82C114000013B1 /* PreferencesViewController.swift */; };
 		55B994D11F9E19EB0045844D /* String+Truncate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B994D01F9E19EB0045844D /* String+Truncate.swift */; };
+		55D4A9CB1F9E6688000227E0 /* MediaKeyTap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D4A9CA1F9E6688000227E0 /* MediaKeyTap.framework */; };
+		55D4A9CC1F9E6688000227E0 /* MediaKeyTap.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55D4A9CA1F9E6688000227E0 /* MediaKeyTap.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55DB7F381F82C488009C3E0E /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DB7F371F82C488009C3E0E /* Channel.swift */; };
 		55DB7F3A1F82C552009C3E0E /* Playlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DB7F391F82C552009C3E0E /* Playlist.swift */; };
 		55DB7F3C1F82CBF6009C3E0E /* SomaAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DB7F3B1F82CBF6009C3E0E /* SomaAPI.swift */; };
 		55E0113A1F8579FF00C499D1 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E011391F8579FF00C499D1 /* Settings.swift */; };
 		55EE48761F8400F600D28F25 /* RadioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55EE48751F8400F600D28F25 /* RadioPlayer.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		55871A161F9D294700201637 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				55D4A9CC1F9E6688000227E0 /* MediaKeyTap.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		556877971F83E33800F6B866 /* MenubarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenubarController.swift; sourceTree = "<group>"; };
@@ -32,6 +48,7 @@
 		558AD6D51F82C114000013B1 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		558AD6D71F82C114000013B1 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		55B994D01F9E19EB0045844D /* String+Truncate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Truncate.swift"; sourceTree = "<group>"; };
+		55D4A9CA1F9E6688000227E0 /* MediaKeyTap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaKeyTap.framework; path = ../Carthage/Build/Mac/MediaKeyTap.framework; sourceTree = "<group>"; };
 		55DB7F371F82C488009C3E0E /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		55DB7F391F82C552009C3E0E /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
 		55DB7F3B1F82CBF6009C3E0E /* SomaAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SomaAPI.swift; sourceTree = "<group>"; };
@@ -44,6 +61,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				55D4A9CB1F9E6688000227E0 /* MediaKeyTap.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +118,7 @@
 		558AD6CB1F82BF34000013B1 /* Supporting-files */ = {
 			isa = PBXGroup;
 			children = (
+				55D4A9CA1F9E6688000227E0 /* MediaKeyTap.framework */,
 				558AD6CC1F82BF34000013B1 /* SomaFM.entitlements */,
 				558AD6CD1F82BF34000013B1 /* Info.plist */,
 			);
@@ -155,6 +174,7 @@
 				558AD6AE1F82BDD1000013B1 /* Resources */,
 				558AD6D21F82C077000013B1 /* ShellScript */,
 				558AD6D31F82C09D000013B1 /* ShellScript */,
+				55871A161F9D294700201637 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -386,6 +406,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 5567X9EQ9Q;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = "Supporting-files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ealeksandrov.somafm;
@@ -402,6 +426,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 5567X9EQ9Q;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+				);
 				INFOPLIST_FILE = "Supporting-files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ealeksandrov.somafm;

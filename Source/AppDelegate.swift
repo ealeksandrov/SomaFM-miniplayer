@@ -4,11 +4,13 @@
 //  Copyright © 2017 Evgeny Aleksandrov. All rights reserved.
 
 import Cocoa
+import MediaKeyTap
 
 @NSApplicationMain
-class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
+class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate, MediaKeyTapDelegate {
 
     let menubarController = MenubarController()
+    var mediaKeyTap: MediaKeyTap?
 
     private var prefsWindowController: NSWindowController?
     var preferencesWindowController: NSWindowController? {
@@ -28,11 +30,27 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
         Log.info("Starting \(AppDelegate.bundleId) v\(AppDelegate.bundleShortVersion) (\(AppDelegate.bundleVersion))")
 
         UserDefaults.standard.register(defaults: ["RadioPlayer.NotificationsEnabled": true])
+
+        mediaKeyTap = MediaKeyTap(delegate: self)
+        mediaKeyTap?.start()
     }
 
     // MARK: - NSWindowDelegate
 
     func windowWillClose(_ notification: Notification) {
         prefsWindowController = nil
+    }
+
+    // MARK: - NSWindowDelegate
+
+    func handle(mediaKey: MediaKey, event: KeyEvent) {
+        switch mediaKey {
+        case .playPause:
+            menubarController.togglePlay()
+        case .previous, .rewind:
+            menubarController.previousTap()
+        case .next, .fastForward:
+            menubarController.nextTap()
+        }
     }
 }

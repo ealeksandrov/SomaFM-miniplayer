@@ -13,6 +13,16 @@ class MenubarController {
 
     let trackItem = NSMenuItem(title: "Track", action: nil, keyEquivalent: "")
 
+    var sortedChannels: [Channel]? {
+        guard let channels = SomaAPI.channels, channels.count > 0 else { return nil }
+
+        if Settings.channelsSortOrder == .listeners {
+            return channels.sorted { $0.listeners > $1.listeners }
+        } else {
+            return channels
+        }
+    }
+
     init() {
         SomaAPI.loadChannels()
 
@@ -87,14 +97,9 @@ class MenubarController {
     @objc func updateStationsMenu() {
         stationsMenu.removeAllItems()
 
-        guard let channels = SomaAPI.channels, channels.count > 0 else {
+        guard let channels = SomaAPI.channels, let sortedChannels = sortedChannels else {
             stationsMenu.addItem(NSMenuItem(title: "No channels available", action: nil, keyEquivalent: ""))
             return
-        }
-
-        var sortedChannels = channels
-        if Settings.channelsSortOrder == .listeners {
-            sortedChannels = channels.sorted { $0.listeners > $1.listeners }
         }
 
         let lastPlayedChannel = SomaAPI.lastPlayedChannel
@@ -147,6 +152,38 @@ class MenubarController {
         }
     }
 
+    @objc func togglePlay() {
+        if RadioPlayer.player.timeControlStatus == .paused {
+            if RadioPlayer.player.currentItem != nil {
+                RadioPlayer.resumeLive()
+            } else if let savedChannel = SomaAPI.lastPlayedChannel {
+                selectChannel(savedChannel)
+            }
+        } else {
+            RadioPlayer.player.pause()
+        }
+    }
+
+    @objc func previousTap() {
+        guard let sortedChannels = sortedChannels,
+            let lastPlayedChannel = SomaAPI.lastPlayedChannel,
+            let lastPlayedIndex = sortedChannels.index(where: { $0.id == lastPlayedChannel.id })
+            else { return }
+
+        let newIndex = lastPlayedIndex == 0 ? sortedChannels.count - 1 : lastPlayedIndex - 1
+        selectChannel(sortedChannels[newIndex])
+    }
+
+    @objc func nextTap() {
+        guard let sortedChannels = sortedChannels,
+            let lastPlayedChannel = SomaAPI.lastPlayedChannel,
+            let lastPlayedIndex = sortedChannels.index(where: { $0.id == lastPlayedChannel.id })
+            else { return }
+
+        let newIndex = lastPlayedIndex == sortedChannels.count - 1 ? 0 : lastPlayedIndex + 1
+        selectChannel(sortedChannels[newIndex])
+    }
+
     // MARK: - Private
 
     private func selectChannel(_ channel: Channel) {
@@ -160,18 +197,6 @@ class MenubarController {
 
     private func showMenu() {
         statusItem.popUpMenu(rightClickMenu)
-    }
-
-    private func togglePlay() {
-        if RadioPlayer.player.timeControlStatus == .paused {
-            if RadioPlayer.player.currentItem != nil {
-                RadioPlayer.resumeLive()
-            } else if let savedChannel = SomaAPI.lastPlayedChannel {
-                selectChannel(savedChannel)
-            }
-        } else {
-            RadioPlayer.player.pause()
-        }
     }
 
     private func setStatusItem(playing: Bool) {
