@@ -137,7 +137,7 @@ class MenubarController {
     func togglePlay() {
         if RadioPlayer.player.timeControlStatus == .paused {
             if RadioPlayer.player.currentItem != nil {
-                RadioPlayer.player.play()
+                RadioPlayer.resumeLive()
             } else if let savedChannel = SomaAPI.lastPlayedChannel {
                 selectChannel(savedChannel)
             }

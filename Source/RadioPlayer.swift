@@ -12,12 +12,19 @@ extension Notification.Name {
 }
 
 struct RadioPlayer {
+    private static var metadataToken: NSKeyValueObservation?
+    private static var timeControlStatusToken: NSKeyValueObservation?
+
     static var player: AVPlayer = {
         $0.volume = Settings.volume
         timeControlStatusToken = $0.observe(\.timeControlStatus) { _, _ in
             NotificationCenter.default.post(name: .radioPlayerStateUpdated, object: nil)
         }
-
+        metadataToken = $0.observe(\.currentItem?.timedMetadata) { player, _ in
+            if let metadata = player.currentItem?.timedMetadata?.first {
+                currentTrack = metadata.stringValue
+            }
+        }
         return $0
     }(AVPlayer())
 
@@ -27,24 +34,30 @@ struct RadioPlayer {
         }
     }
 
-    private static var metadataToken: NSKeyValueObservation?
-    private static var timeControlStatusToken: NSKeyValueObservation?
-
     static func play(channel: Channel) {
         Settings.lastPlayedChannelId = channel.id
 
-        if let firstPlaylist = channel.bestQualityPlaylist {
-            let playerItem = AVPlayerItem(url: firstPlaylist.url)
-            currentTrack = nil
-
-            metadataToken = playerItem.observe(\.timedMetadata) { item, _ in
-                if let metadata = item.timedMetadata?.first {
-                    currentTrack = metadata.stringValue
-                }
-            }
-
+        if let playerItem = playerItem(fromChannel: channel) {
             player.replaceCurrentItem(with: playerItem)
             player.play()
         }
+    }
+
+    static func resumeLive() {
+        if let playerItem = playerItem(fromChannel: SomaAPI.lastPlayedChannel) {
+            player.replaceCurrentItem(with: playerItem)
+            player.play()
+        }
+    }
+
+    // MARK: - Private
+
+    private static func playerItem(fromChannel: Channel?) -> AVPlayerItem? {
+        guard let channel = fromChannel, let firstPlaylist = channel.bestQualityPlaylist else { return nil }
+
+        let playerItem = AVPlayerItem(url: firstPlaylist.url)
+        currentTrack = nil
+
+        return playerItem
     }
 }
