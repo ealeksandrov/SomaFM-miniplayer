@@ -102,6 +102,9 @@
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
+                                <connections>
+                                    <action selector="tapStartAtLogin:" target="XfG-lQ-9wD" id="F3K-lS-rsh"/>
+                                </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PmU-Zt-r8g">
                                 <rect key="frame" x="18" y="195" width="312" height="16"/>
@@ -208,6 +211,9 @@
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mi1-Y2-4N3" secondAttribute="trailing" constant="20" id="zTY-br-jmh"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="startAtLoginButton" destination="SI3-e1-D9B" id="nPV-ty-UpR"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="KYv-Wp-8ng"/>

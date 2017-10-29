@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		556877981F83E33800F6B866 /* MenubarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556877971F83E33800F6B866 /* MenubarController.swift */; };
+		5576EB301F9F65AA00F30FB9 /* StartAtLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5576EB2F1F9F65AA00F30FB9 /* StartAtLogin.swift */; };
+		558ABBED1F9F345700F2EAD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558ABBEC1F9F345700F2EAD6 /* AppDelegate.swift */; };
+		558ABBF21F9F345700F2EAD6 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 558ABBF01F9F345700F2EAD6 /* MainMenu.xib */; };
+		558ABBF91F9F35D300F2EAD6 /* SomaFM-helper.app in CopyFiles */ = {isa = PBXBuildFile; fileRef = 558ABBEA1F9F345700F2EAD6 /* SomaFM-helper.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		558AD6CE1F82BF63000013B1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 558AD6CA1F82BF34000013B1 /* Assets.xcassets */; };
 		558AD6CF1F82BF69000013B1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 558AD6C81F82BF34000013B1 /* Main.storyboard */; };
 		558AD6D11F82BF6F000013B1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558AD6C51F82BF2F000013B1 /* AppDelegate.swift */; };
@@ -35,10 +39,26 @@
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		558ABBF81F9F35C000F2EAD6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = Contents/Library/LoginItems;
+			dstSubfolderSpec = 1;
+			files = (
+				558ABBF91F9F35D300F2EAD6 /* SomaFM-helper.app in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		556877971F83E33800F6B866 /* MenubarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenubarController.swift; sourceTree = "<group>"; };
+		5576EB2F1F9F65AA00F30FB9 /* StartAtLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartAtLogin.swift; sourceTree = "<group>"; };
+		558ABBEA1F9F345700F2EAD6 /* SomaFM-helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SomaFM-helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		558ABBEC1F9F345700F2EAD6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		558ABBF11F9F345700F2EAD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		558ABBF31F9F345700F2EAD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		558ABBF41F9F345700F2EAD6 /* SomaFM_helper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SomaFM_helper.entitlements; sourceTree = "<group>"; };
 		558AD6B01F82BDD1000013B1 /* SomaFM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SomaFM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		558AD6C51F82BF2F000013B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		558AD6C91F82BF34000013B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -57,6 +77,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		558ABBE71F9F345700F2EAD6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		558AD6AD1F82BDD1000013B1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -68,12 +95,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		558ABBEB1F9F345700F2EAD6 /* SomaFM-helper */ = {
+			isa = PBXGroup;
+			children = (
+				558ABBEC1F9F345700F2EAD6 /* AppDelegate.swift */,
+				558ABBF01F9F345700F2EAD6 /* MainMenu.xib */,
+				558ABBF31F9F345700F2EAD6 /* Info.plist */,
+				558ABBF41F9F345700F2EAD6 /* SomaFM_helper.entitlements */,
+			);
+			path = "SomaFM-helper";
+			sourceTree = "<group>";
+		};
 		558AD6A71F82BDD1000013B1 = {
 			isa = PBXGroup;
 			children = (
 				558AD6C31F82BF2F000013B1 /* Source */,
 				558AD6C61F82BF34000013B1 /* Resources */,
 				558AD6CB1F82BF34000013B1 /* Supporting-files */,
+				558ABBEB1F9F345700F2EAD6 /* SomaFM-helper */,
 				558AD6B11F82BDD1000013B1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -82,6 +121,7 @@
 			isa = PBXGroup;
 			children = (
 				558AD6B01F82BDD1000013B1 /* SomaFM.app */,
+				558ABBEA1F9F345700F2EAD6 /* SomaFM-helper.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -140,6 +180,7 @@
 				558AD6D71F82C114000013B1 /* Log.swift */,
 				55E011391F8579FF00C499D1 /* Settings.swift */,
 				55B994D01F9E19EB0045844D /* String+Truncate.swift */,
+				5576EB2F1F9F65AA00F30FB9 /* StartAtLogin.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -165,6 +206,23 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		558ABBE91F9F345700F2EAD6 /* SomaFM-helper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 558ABBF71F9F345700F2EAD6 /* Build configuration list for PBXNativeTarget "SomaFM-helper" */;
+			buildPhases = (
+				558ABBE61F9F345700F2EAD6 /* Sources */,
+				558ABBE71F9F345700F2EAD6 /* Frameworks */,
+				558ABBE81F9F345700F2EAD6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "SomaFM-helper";
+			productName = "SomaFM-helper";
+			productReference = 558ABBEA1F9F345700F2EAD6 /* SomaFM-helper.app */;
+			productType = "com.apple.product-type.application";
+		};
 		558AD6AF1F82BDD1000013B1 /* SomaFM */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 558AD6C01F82BDD1000013B1 /* Build configuration list for PBXNativeTarget "SomaFM" */;
@@ -175,6 +233,7 @@
 				558AD6D21F82C077000013B1 /* ShellScript */,
 				558AD6D31F82C09D000013B1 /* ShellScript */,
 				55871A161F9D294700201637 /* Embed Frameworks */,
+				558ABBF81F9F35C000F2EAD6 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -195,9 +254,18 @@
 				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = "Evgeny Aleksandrov";
 				TargetAttributes = {
+					558ABBE91F9F345700F2EAD6 = {
+						CreatedOnToolsVersion = 9.0;
+						ProvisioningStyle = Automatic;
+					};
 					558AD6AF1F82BDD1000013B1 = {
 						CreatedOnToolsVersion = 9.0;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -215,11 +283,20 @@
 			projectRoot = "";
 			targets = (
 				558AD6AF1F82BDD1000013B1 /* SomaFM */,
+				558ABBE91F9F345700F2EAD6 /* SomaFM-helper */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		558ABBE81F9F345700F2EAD6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				558ABBF21F9F345700F2EAD6 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		558AD6AE1F82BDD1000013B1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -261,6 +338,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		558ABBE61F9F345700F2EAD6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				558ABBED1F9F345700F2EAD6 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		558AD6AC1F82BDD1000013B1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -272,6 +357,7 @@
 				558AD6D91F82C119000013B1 /* PreferencesViewController.swift in Sources */,
 				55DB7F381F82C488009C3E0E /* Channel.swift in Sources */,
 				558AD6D81F82C116000013B1 /* Log.swift in Sources */,
+				5576EB301F9F65AA00F30FB9 /* StartAtLogin.swift in Sources */,
 				55E0113A1F8579FF00C499D1 /* Settings.swift in Sources */,
 				558AD6D11F82BF6F000013B1 /* AppDelegate.swift in Sources */,
 				55DB7F3A1F82C552009C3E0E /* Playlist.swift in Sources */,
@@ -281,6 +367,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		558ABBF01F9F345700F2EAD6 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				558ABBF11F9F345700F2EAD6 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
 		558AD6C81F82BF34000013B1 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -292,6 +386,38 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		558ABBF51F9F345700F2EAD6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "SomaFM-helper/SomaFM_helper.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5567X9EQ9Q;
+				INFOPLIST_FILE = "SomaFM-helper/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ealeksandrov.somafm-helper";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Debug;
+		};
+		558ABBF61F9F345700F2EAD6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "SomaFM-helper/SomaFM_helper.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = 5567X9EQ9Q;
+				INFOPLIST_FILE = "SomaFM-helper/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.ealeksandrov.somafm-helper";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+			};
+			name = Release;
+		};
 		558AD6BE1F82BDD1000013B1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -441,6 +567,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		558ABBF71F9F345700F2EAD6 /* Build configuration list for PBXNativeTarget "SomaFM-helper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				558ABBF51F9F345700F2EAD6 /* Debug */,
+				558ABBF61F9F345700F2EAD6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		558AD6AB1F82BDD1000013B1 /* Build configuration list for PBXProject "SomaFM" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
