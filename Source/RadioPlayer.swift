@@ -11,7 +11,11 @@ extension Notification.Name {
 }
 
 struct RadioPlayer {
-    static var player = AVPlayer()
+    static var player: AVPlayer = {
+        $0.volume = Settings.volume
+        return $0
+    }(AVPlayer())
+
     static var currentTrack: String? {
         didSet {
             NotificationCenter.default.post(name: .radioPlayerTrackNameUpdated, object: nil)
@@ -32,7 +36,6 @@ struct RadioPlayer {
             }
 
             player.replaceCurrentItem(with: playerItem)
-            player.volume = 0.1
             player.play()
         }
     }
