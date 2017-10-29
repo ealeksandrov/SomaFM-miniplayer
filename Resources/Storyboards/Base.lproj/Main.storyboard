@@ -93,18 +93,18 @@
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="PreferencesViewController" customModule="SomaFM" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="200"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="190"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="SI3-e1-D9B">
-                                <rect key="frame" x="18" y="164" width="104" height="18"/>
+                                <rect key="frame" x="18" y="154" width="104" height="18"/>
                                 <buttonCell key="cell" type="check" title="Start at Login" bezelStyle="regularSquare" imagePosition="left" inset="2" id="i30-gu-dVX">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
                             </button>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="gVp-ND-Gdb">
-                                <rect key="frame" x="18" y="109" width="114" height="18"/>
+                                <rect key="frame" x="18" y="99" width="114" height="18"/>
                                 <buttonCell key="cell" type="check" title="Play on Launch" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Lah-El-9l4">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -114,27 +114,64 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LfQ-DL-gam">
-                                <rect key="frame" x="18" y="90" width="245" height="16"/>
+                                <rect key="frame" x="18" y="80" width="245" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Immediately starts playing when launched." id="gFh-Zx-ZWH">
-                                    <font key="font" metaFont="system" size="12"/>
+                                    <font key="font" metaFont="cellTitle"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PmU-Zt-r8g">
-                                <rect key="frame" x="18" y="145" width="312" height="16"/>
+                                <rect key="frame" x="18" y="135" width="312" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Automatically opens the app when you start your Mac." id="Mdn-2A-S3Y">
-                                    <font key="font" metaFont="system" size="12"/>
+                                    <font key="font" metaFont="cellTitle"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cIX-7v-fyZ">
+                                <rect key="frame" x="18" y="22" width="125" height="17"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Channels sort order" id="ckz-OG-81M">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ep3-JP-TPh">
+                                <rect key="frame" x="248" y="17" width="135" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="130" id="A6u-Pp-Sop"/>
+                                </constraints>
+                                <popUpButtonCell key="cell" type="push" title="Default" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="tk1-zz-WT8" id="u4n-XN-OWr">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="menu"/>
+                                    <menu key="menu" id="M0e-JB-Qi1">
+                                        <items>
+                                            <menuItem title="Default" state="on" id="tk1-zz-WT8"/>
+                                            <menuItem title="# of listeners" id="MKH-Cy-Xlh"/>
+                                        </items>
+                                    </menu>
+                                </popUpButtonCell>
+                                <connections>
+                                    <action selector="updateSortOrder:" target="XfG-lQ-9wD" id="c9j-6h-79N"/>
+                                    <binding destination="KYv-Wp-8ng" name="selectedIndex" keyPath="values.SomaAPI.Channels.SortOrder" id="QLm-Eb-9tB"/>
+                                </connections>
+                            </popUpButton>
+                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="ADb-RQ-2cx">
+                                <rect key="frame" x="20" y="57" width="360" height="5"/>
+                            </box>
                         </subviews>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="ADb-RQ-2cx" secondAttribute="trailing" constant="20" id="0k6-Pi-CTe"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LfQ-DL-gam" secondAttribute="trailing" constant="20" id="44E-dd-4xN"/>
+                            <constraint firstAttribute="trailing" secondItem="ep3-JP-TPh" secondAttribute="trailing" constant="20" id="4Ta-Vs-f18"/>
                             <constraint firstItem="SI3-e1-D9B" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="4fX-fA-6uC"/>
+                            <constraint firstItem="ep3-JP-TPh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cIX-7v-fyZ" secondAttribute="trailing" constant="20" id="8J8-JC-vas"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SI3-e1-D9B" secondAttribute="trailing" constant="20" id="8QD-hb-vby"/>
                             <constraint firstItem="SI3-e1-D9B" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="AzT-zs-ZkN"/>
+                            <constraint firstItem="cIX-7v-fyZ" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="DKf-nW-SDY"/>
+                            <constraint firstItem="ADb-RQ-2cx" firstAttribute="top" secondItem="LfQ-DL-gam" secondAttribute="bottom" constant="20" id="Dge-u8-H0z"/>
+                            <constraint firstItem="ADb-RQ-2cx" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="EAr-E8-Ark"/>
                             <constraint firstItem="LfQ-DL-gam" firstAttribute="leading" secondItem="SI3-e1-D9B" secondAttribute="leading" id="Mb6-hp-1KS"/>
                             <constraint firstItem="PmU-Zt-r8g" firstAttribute="leading" secondItem="SI3-e1-D9B" secondAttribute="leading" id="RIP-QP-r5w"/>
                             <constraint firstItem="PmU-Zt-r8g" firstAttribute="top" secondItem="SI3-e1-D9B" secondAttribute="bottom" constant="5" id="Z2e-n7-sLt"/>
@@ -143,6 +180,8 @@
                             <constraint firstItem="gVp-ND-Gdb" firstAttribute="top" secondItem="PmU-Zt-r8g" secondAttribute="bottom" constant="20" id="iVs-DQ-UeZ"/>
                             <constraint firstItem="gVp-ND-Gdb" firstAttribute="leading" secondItem="SI3-e1-D9B" secondAttribute="leading" id="mEW-i0-bwv"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PmU-Zt-r8g" secondAttribute="trailing" constant="20" id="wCc-Ho-4y6"/>
+                            <constraint firstItem="cIX-7v-fyZ" firstAttribute="top" secondItem="ADb-RQ-2cx" secondAttribute="bottom" constant="20" id="yLC-K3-pVT"/>
+                            <constraint firstItem="cIX-7v-fyZ" firstAttribute="centerY" secondItem="ep3-JP-TPh" secondAttribute="centerY" id="zBO-fG-p9T"/>
                         </constraints>
                     </view>
                 </viewController>

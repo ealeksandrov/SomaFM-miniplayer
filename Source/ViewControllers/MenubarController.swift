@@ -92,11 +92,16 @@ class MenubarController {
             return
         }
 
+        var sortedChannels = channels
+        if Settings.channelsSortOrder == .listeners {
+            sortedChannels = channels.sorted { $0.listeners > $1.listeners }
+        }
+
         let lastPlayedChannel = SomaAPI.lastPlayedChannel
 
-        for (index, channel) in channels.enumerated() {
+        for channel in sortedChannels {
             let channelItem = NSMenuItem(title: channel.title, action: #selector(MenubarController.selectStation(_:)), keyEquivalent: "")
-            channelItem.tag = index
+            channelItem.tag = channels.index(where: { $0.id == channel.id }) ?? 0
             channelItem.target = self
 
             if channel.id == lastPlayedChannel?.id {

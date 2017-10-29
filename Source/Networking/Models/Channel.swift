@@ -52,6 +52,8 @@ public struct Channel: Codable {
         self.updated = try container.decode(String.self, forKey: .updated)
         if let listenersString = try? container.decode(String.self, forKey: .listeners) {
             self.listeners = Int(listenersString) ?? 0
+        } else if let listenersInt = try? container.decode(Int.self, forKey: .listeners) {
+            self.listeners = listenersInt
         } else {
             self.listeners = 0
         }

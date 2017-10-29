@@ -10,6 +10,12 @@ enum UserDefaultsKey {
     static let lastPlayedChannel = "RadioPlayer.Channel.LastPlayed"
     static let shouldPlayOnLaunch = "RadioPlayer.ShouldPlayOnLaunch"
     static let apiCacheTimestamp = "SomaAPI.Cache.Timestamp"
+    static let apiChannelsSortOrder = "SomaAPI.Channels.SortOrder"
+}
+
+enum ChannelsSortOrder: Int {
+    case `default`
+    case listeners
 }
 
 struct Settings {
@@ -28,6 +34,20 @@ struct Settings {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaultsKey.apiCacheTimestamp)
+        }
+    }
+
+    static var channelsSortOrder: ChannelsSortOrder {
+        get {
+            if let intValue = UserDefaults.standard.object(forKey: UserDefaultsKey.apiChannelsSortOrder) as? Int,
+                let enumValue = ChannelsSortOrder(rawValue: intValue) {
+                return enumValue
+            } else {
+                return .default
+            }
+        }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: UserDefaultsKey.apiChannelsSortOrder)
         }
     }
 
