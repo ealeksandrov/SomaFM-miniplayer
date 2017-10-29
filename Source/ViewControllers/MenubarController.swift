@@ -43,6 +43,10 @@ class MenubarController {
         stationsItem.submenu = stationsMenu
         rightClickMenu.addItem(stationsItem)
         rightClickMenu.addItem(NSMenuItem.separator())
+        let preferencesItem = NSMenuItem(title: "Preferences...", action: #selector(MenubarController.openPreferences(_:)), keyEquivalent: "")
+        preferencesItem.target = self
+        rightClickMenu.addItem(preferencesItem)
+        rightClickMenu.addItem(NSMenuItem.separator())
         rightClickMenu.addItem(NSMenuItem(title: "Quit SomaFM", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
 
         updateStationsMenu()
@@ -116,6 +120,16 @@ class MenubarController {
 
         if sender.window?.currentEvent?.type == .leftMouseUp {
             Settings.volume = sender.floatValue
+        }
+    }
+
+    @objc func openPreferences(_ sender: NSMenuItem) {
+        guard let appDelegate = NSApp.delegate as? AppDelegate else { return }
+
+        if let preferencesWindowController = appDelegate.preferencesWindowController {
+            NSApp.activate(ignoringOtherApps: true)
+            preferencesWindowController.showWindow(sender)
+            preferencesWindowController.window?.delegate = appDelegate
         }
     }
 

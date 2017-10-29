@@ -1,11 +1,11 @@
 //
-//  ViewController.swift
+//  PreferencesViewController.swift
 //
 //  Copyright © 2017 Evgeny Aleksandrov. All rights reserved.
 
 import Cocoa
 
-class ViewController: NSViewController {
+class PreferencesViewController: NSViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
