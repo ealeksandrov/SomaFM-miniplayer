@@ -8,11 +8,16 @@ import AVFoundation
 
 extension Notification.Name {
     static let radioPlayerTrackNameUpdated = Notification.Name("RadioPlayer.TrackName.Updated")
+    static let radioPlayerStateUpdated = Notification.Name("RadioPlayer.State.Updated")
 }
 
 struct RadioPlayer {
     static var player: AVPlayer = {
         $0.volume = Settings.volume
+        timeControlStatusToken = $0.observe(\.timeControlStatus) { _, _ in
+            NotificationCenter.default.post(name: .radioPlayerStateUpdated, object: nil)
+        }
+
         return $0
     }(AVPlayer())
 
@@ -22,14 +27,15 @@ struct RadioPlayer {
         }
     }
 
-    private static var token: NSKeyValueObservation?
+    private static var metadataToken: NSKeyValueObservation?
+    private static var timeControlStatusToken: NSKeyValueObservation?
 
     static func play(channel: Channel) {
         if let firstPlaylist = channel.bestQualityPlaylist {
             let playerItem = AVPlayerItem(url: firstPlaylist.url)
             currentTrack = nil
 
-            token = playerItem.observe(\.timedMetadata) { item, _ in
+            metadataToken = playerItem.observe(\.timedMetadata) { item, _ in
                 if let metadata = item.timedMetadata?.first {
                     currentTrack = metadata.stringValue
                 }

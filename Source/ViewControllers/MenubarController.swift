@@ -19,6 +19,7 @@ class MenubarController {
 
         NotificationCenter.default.addObserver(self, selector: #selector(MenubarController.updateStationsMenu), name: .somaApiChannelsUpdated, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(MenubarController.updateTrackName), name: .radioPlayerTrackNameUpdated, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MenubarController.updatePlaybackState), name: .radioPlayerStateUpdated, object: nil)
     }
 
     func setupStatusItem() {
@@ -91,6 +92,10 @@ class MenubarController {
 
     @objc func updateTrackName() {
         trackItem.title = RadioPlayer.currentTrack ?? "..."
+    }
+
+    @objc func updatePlaybackState() {
+        setStatusItem(playing: RadioPlayer.player.timeControlStatus != .paused)
     }
 
     @objc func selectStation(_ sender: NSMenuItem) {
