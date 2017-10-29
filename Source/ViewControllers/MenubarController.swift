@@ -114,6 +114,9 @@ class MenubarController {
 
     @objc func updateTrackName() {
         trackItem.title = RadioPlayer.currentTrack ?? "..."
+        if Settings.notificationsEnabled {
+            showUserNotification()
+        }
     }
 
     @objc func updatePlaybackState() {
@@ -146,7 +149,7 @@ class MenubarController {
 
     // MARK: - Private
 
-    func selectChannel(_ channel: Channel) {
+    private func selectChannel(_ channel: Channel) {
         guard let channels = SomaAPI.channels, let selectedChannelIdx = channels.index(where: { $0.id == channel.id }) else { return }
 
         stationsMenu.items.forEach { $0.state = $0.tag == selectedChannelIdx ? .on : .off }
@@ -155,11 +158,11 @@ class MenubarController {
         Log.info("Selected station \"\(channel.title)\"")
     }
 
-    func showMenu() {
+    private func showMenu() {
         statusItem.popUpMenu(rightClickMenu)
     }
 
-    func togglePlay() {
+    private func togglePlay() {
         if RadioPlayer.player.timeControlStatus == .paused {
             if RadioPlayer.player.currentItem != nil {
                 RadioPlayer.resumeLive()
@@ -171,7 +174,7 @@ class MenubarController {
         }
     }
 
-    func setStatusItem(playing: Bool) {
+    private func setStatusItem(playing: Bool) {
         if playing {
             statusItem.button?.image = NSImage(named: NSImage.Name(rawValue: "media_pause"))
             statusItem.toolTip = "Click to pause\nRight click to show menu"
@@ -179,5 +182,16 @@ class MenubarController {
             statusItem.button?.image = NSImage(named: NSImage.Name(rawValue: "media_play"))
             statusItem.toolTip = "Click to play\nRight click to show menu"
         }
+    }
+
+    private func showUserNotification() {
+        guard let trackName = RadioPlayer.currentTrack else { return }
+        let stationName = SomaAPI.lastPlayedChannel?.title ?? "SomaFM"
+
+        let notification = NSUserNotification()
+        notification.title = stationName
+        notification.informativeText = trackName
+        notification.contentImage = NSImage(named: NSImage.Name(rawValue: "groovesalad512"))
+        NSUserNotificationCenter.default.deliver(notification)
     }
 }

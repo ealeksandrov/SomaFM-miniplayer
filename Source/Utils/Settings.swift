@@ -9,6 +9,7 @@ enum UserDefaultsKey {
     static let volume = "RadioPlayer.Volume"
     static let lastPlayedChannel = "RadioPlayer.Channel.LastPlayed"
     static let shouldPlayOnLaunch = "RadioPlayer.ShouldPlayOnLaunch"
+    static let notificationsEnabled = "RadioPlayer.NotificationsEnabled"
     static let apiCacheTimestamp = "SomaAPI.Cache.Timestamp"
     static let apiChannelsSortOrder = "SomaAPI.Channels.SortOrder"
 }
@@ -66,6 +67,15 @@ struct Settings {
         }
         set {
             UserDefaults.standard.set(newValue, forKey: UserDefaultsKey.shouldPlayOnLaunch)
+        }
+    }
+
+    static var notificationsEnabled: Bool {
+        get {
+            return UserDefaults.standard.object(forKey: UserDefaultsKey.notificationsEnabled) as? Bool ?? false
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: UserDefaultsKey.notificationsEnabled)
         }
     }
 }

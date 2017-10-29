@@ -27,6 +27,7 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSWindowDelegate {
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         Log.info("Starting \(AppDelegate.bundleId) v\(AppDelegate.bundleShortVersion) (\(AppDelegate.bundleVersion))")
 
+        UserDefaults.standard.register(defaults: ["RadioPlayer.NotificationsEnabled": true])
     }
 
     // MARK: - NSWindowDelegate
