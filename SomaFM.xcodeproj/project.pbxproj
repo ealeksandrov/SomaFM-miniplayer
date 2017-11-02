@@ -59,7 +59,7 @@
 		558ABBF11F9F345700F2EAD6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		558ABBF31F9F345700F2EAD6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		558ABBF41F9F345700F2EAD6 /* SomaFM_helper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SomaFM_helper.entitlements; sourceTree = "<group>"; };
-		558AD6B01F82BDD1000013B1 /* SomaFM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SomaFM.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		558AD6B01F82BDD1000013B1 /* SomaFM miniplayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SomaFM miniplayer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		558AD6C51F82BF2F000013B1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		558AD6C91F82BF34000013B1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		558AD6CA1F82BF34000013B1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 		558AD6B11F82BDD1000013B1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				558AD6B01F82BDD1000013B1 /* SomaFM.app */,
+				558AD6B01F82BDD1000013B1 /* SomaFM miniplayer.app */,
 				558ABBEA1F9F345700F2EAD6 /* SomaFM-helper.app */,
 			);
 			name = Products;
@@ -241,7 +241,7 @@
 			);
 			name = SomaFM;
 			productName = SomaFM;
-			productReference = 558AD6B01F82BDD1000013B1 /* SomaFM.app */;
+			productReference = 558AD6B01F82BDD1000013B1 /* SomaFM miniplayer.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -539,7 +539,7 @@
 				INFOPLIST_FILE = "Supporting-files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ealeksandrov.somafm;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "SomaFM miniplayer";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Debug;
@@ -559,7 +559,7 @@
 				INFOPLIST_FILE = "Supporting-files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.ealeksandrov.somafm;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "SomaFM miniplayer";
 				SWIFT_VERSION = 4.0;
 			};
 			name = Release;
