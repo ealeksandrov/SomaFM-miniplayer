@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13196" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13196"/>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13529"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -61,7 +63,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="SomaFM" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="SomaFM_miniplayer" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="79P-41-qrI"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -91,13 +93,13 @@
         <!--Preferences View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="PreferencesViewController" customModule="SomaFM" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="XfG-lQ-9wD" customClass="PreferencesViewController" customModule="SomaFM_miniplayer" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="400" height="250"/>
+                        <rect key="frame" x="0.0" y="0.0" width="400" height="338"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="SI3-e1-D9B">
-                                <rect key="frame" x="18" y="214" width="104" height="18"/>
+                                <rect key="frame" x="18" y="302" width="104" height="18"/>
                                 <buttonCell key="cell" type="check" title="Start at Login" bezelStyle="regularSquare" imagePosition="left" inset="2" id="i30-gu-dVX">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -107,7 +109,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="PmU-Zt-r8g">
-                                <rect key="frame" x="18" y="195" width="312" height="16"/>
+                                <rect key="frame" x="18" y="283" width="312" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Automatically opens the app when you start your Mac." id="Mdn-2A-S3Y">
                                     <font key="font" metaFont="cellTitle"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -115,7 +117,7 @@
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="gVp-ND-Gdb">
-                                <rect key="frame" x="18" y="159" width="114" height="18"/>
+                                <rect key="frame" x="18" y="247" width="114" height="18"/>
                                 <buttonCell key="cell" type="check" title="Play on Launch" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Lah-El-9l4">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -125,7 +127,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LfQ-DL-gam">
-                                <rect key="frame" x="18" y="140" width="245" height="16"/>
+                                <rect key="frame" x="18" y="228" width="245" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Immediately starts playing when launched." id="gFh-Zx-ZWH">
                                     <font key="font" metaFont="cellTitle"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -133,7 +135,7 @@
                                 </textFieldCell>
                             </textField>
                             <button translatesAutoresizingMaskIntoConstraints="NO" id="n0g-yw-ZC2">
-                                <rect key="frame" x="18" y="104" width="141" height="18"/>
+                                <rect key="frame" x="18" y="192" width="141" height="18"/>
                                 <buttonCell key="cell" type="check" title="Enable notifications" bezelStyle="regularSquare" imagePosition="left" inset="2" id="pLL-kZ-Loi">
                                     <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -143,7 +145,7 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mi1-Y2-4N3">
-                                <rect key="frame" x="18" y="85" width="268" height="16"/>
+                                <rect key="frame" x="18" y="173" width="268" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Shows system notifications with tracks names." id="uNf-yT-8Mq">
                                     <font key="font" metaFont="cellTitle"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -151,10 +153,10 @@
                                 </textFieldCell>
                             </textField>
                             <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="ADb-RQ-2cx">
-                                <rect key="frame" x="20" y="62" width="360" height="5"/>
+                                <rect key="frame" x="20" y="150" width="360" height="5"/>
                             </box>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cIX-7v-fyZ">
-                                <rect key="frame" x="18" y="27" width="125" height="17"/>
+                                <rect key="frame" x="18" y="115" width="125" height="17"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Channels sort order" id="ckz-OG-81M">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -162,7 +164,7 @@
                                 </textFieldCell>
                             </textField>
                             <popUpButton verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ep3-JP-TPh">
-                                <rect key="frame" x="248" y="22" width="135" height="26"/>
+                                <rect key="frame" x="248" y="110" width="135" height="26"/>
                                 <constraints>
                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="130" id="A6u-Pp-Sop"/>
                                 </constraints>
@@ -181,16 +183,71 @@
                                     <binding destination="KYv-Wp-8ng" name="selectedIndex" keyPath="values.SomaAPI.Channels.SortOrder" id="QLm-Eb-9tB"/>
                                 </connections>
                             </popUpButton>
+                            <box verticalHuggingPriority="750" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="ovd-bD-YWD">
+                                <rect key="frame" x="20" y="92" width="360" height="5"/>
+                            </box>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="dUi-8Y-F9m">
+                                <rect key="frame" x="95" y="36" width="210" height="48"/>
+                                <subviews>
+                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BZG-9V-4Yz">
+                                        <rect key="frame" x="0.0" y="0.0" width="48" height="48"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="BZG-9V-4Yz" secondAttribute="height" multiplier="1:1" id="HqP-lz-Y7m"/>
+                                            <constraint firstAttribute="width" constant="48" id="KO0-nR-VP5"/>
+                                        </constraints>
+                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="AppIcon" id="0hp-Iu-hwz"/>
+                                    </imageView>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="XHL-DP-dme">
+                                        <rect key="frame" x="55" y="23" width="148" height="19"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="SomaFM miniplayer" id="cZI-Am-Xo8">
+                                            <font key="font" metaFont="systemBold" size="15"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="YzI-gg-fg0">
+                                        <rect key="frame" x="79" y="6" width="100" height="17"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Version 1.0.0 (1)" id="ccA-sv-DL6">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="BZG-9V-4Yz" firstAttribute="top" secondItem="dUi-8Y-F9m" secondAttribute="top" id="2KW-u0-60e"/>
+                                    <constraint firstAttribute="width" constant="210" id="ESh-5D-b9n"/>
+                                    <constraint firstAttribute="bottom" secondItem="BZG-9V-4Yz" secondAttribute="bottom" id="J0h-la-wWO"/>
+                                    <constraint firstItem="BZG-9V-4Yz" firstAttribute="leading" secondItem="dUi-8Y-F9m" secondAttribute="leading" id="OcL-N5-JTL"/>
+                                    <constraint firstItem="YzI-gg-fg0" firstAttribute="top" secondItem="XHL-DP-dme" secondAttribute="bottom" id="WNV-IR-hup"/>
+                                    <constraint firstItem="XHL-DP-dme" firstAttribute="centerY" secondItem="dUi-8Y-F9m" secondAttribute="centerY" constant="-8" id="duC-V8-57w"/>
+                                    <constraint firstItem="YzI-gg-fg0" firstAttribute="centerX" secondItem="dUi-8Y-F9m" secondAttribute="centerX" constant="24" id="fO5-Sa-xTm"/>
+                                    <constraint firstItem="XHL-DP-dme" firstAttribute="centerX" secondItem="dUi-8Y-F9m" secondAttribute="centerX" constant="24" id="hYK-Qx-MDD"/>
+                                </constraints>
+                            </customView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JtP-VU-YdH" customClass="HyperTextField" customModule="SomaFM_miniplayer" customModuleProvider="target">
+                                <rect key="frame" x="29" y="10" width="342" height="16"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="This application is open source and can be found on GitHub" id="6km-u5-Bsb">
+                                    <font key="font" metaFont="system" size="12"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="href" value="https://github.com/ealeksandrov/SomaFM-miniplayer"/>
+                                </userDefinedRuntimeAttributes>
+                            </textField>
                         </subviews>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="ADb-RQ-2cx" secondAttribute="trailing" constant="20" id="0k6-Pi-CTe"/>
                             <constraint firstItem="mi1-Y2-4N3" firstAttribute="leading" secondItem="SI3-e1-D9B" secondAttribute="leading" id="1gS-Zx-aoy"/>
+                            <constraint firstItem="dUi-8Y-F9m" firstAttribute="top" secondItem="ovd-bD-YWD" secondAttribute="bottom" constant="10" id="1vW-v9-DoA"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="LfQ-DL-gam" secondAttribute="trailing" constant="20" id="44E-dd-4xN"/>
                             <constraint firstAttribute="trailing" secondItem="ep3-JP-TPh" secondAttribute="trailing" constant="20" id="4Ta-Vs-f18"/>
                             <constraint firstItem="SI3-e1-D9B" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="20" id="4fX-fA-6uC"/>
                             <constraint firstItem="ADb-RQ-2cx" firstAttribute="top" secondItem="mi1-Y2-4N3" secondAttribute="bottom" constant="20" id="5qL-MB-DN4"/>
                             <constraint firstItem="ep3-JP-TPh" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="cIX-7v-fyZ" secondAttribute="trailing" constant="20" id="8J8-JC-vas"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="SI3-e1-D9B" secondAttribute="trailing" constant="20" id="8QD-hb-vby"/>
+                            <constraint firstAttribute="trailing" secondItem="ovd-bD-YWD" secondAttribute="trailing" constant="20" id="9Kd-HU-VcJ"/>
                             <constraint firstItem="SI3-e1-D9B" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="AzT-zs-ZkN"/>
                             <constraint firstItem="cIX-7v-fyZ" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="DKf-nW-SDY"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="n0g-yw-ZC2" secondAttribute="trailing" constant="20" id="DOd-Pr-fcR"/>
@@ -199,13 +256,18 @@
                             <constraint firstItem="LfQ-DL-gam" firstAttribute="leading" secondItem="SI3-e1-D9B" secondAttribute="leading" id="Mb6-hp-1KS"/>
                             <constraint firstItem="n0g-yw-ZC2" firstAttribute="leading" secondItem="SI3-e1-D9B" secondAttribute="leading" id="NzH-Vu-DXD"/>
                             <constraint firstItem="PmU-Zt-r8g" firstAttribute="leading" secondItem="SI3-e1-D9B" secondAttribute="leading" id="RIP-QP-r5w"/>
+                            <constraint firstItem="ovd-bD-YWD" firstAttribute="top" secondItem="cIX-7v-fyZ" secondAttribute="bottom" constant="20" id="Ro5-qQ-Yrb"/>
+                            <constraint firstItem="JtP-VU-YdH" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="TkZ-aN-UNH"/>
                             <constraint firstItem="mi1-Y2-4N3" firstAttribute="top" secondItem="n0g-yw-ZC2" secondAttribute="bottom" constant="5" id="WPj-Bt-h9i"/>
                             <constraint firstItem="PmU-Zt-r8g" firstAttribute="top" secondItem="SI3-e1-D9B" secondAttribute="bottom" constant="5" id="Z2e-n7-sLt"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="gVp-ND-Gdb" secondAttribute="trailing" constant="20" id="bcn-hC-7N9"/>
                             <constraint firstItem="LfQ-DL-gam" firstAttribute="top" secondItem="gVp-ND-Gdb" secondAttribute="bottom" constant="5" id="cxE-Dz-x6K"/>
+                            <constraint firstItem="JtP-VU-YdH" firstAttribute="top" secondItem="dUi-8Y-F9m" secondAttribute="bottom" constant="10" id="drv-fW-LRT"/>
                             <constraint firstItem="gVp-ND-Gdb" firstAttribute="top" secondItem="PmU-Zt-r8g" secondAttribute="bottom" constant="20" id="iVs-DQ-UeZ"/>
+                            <constraint firstItem="ovd-bD-YWD" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="jyC-5v-yyO"/>
                             <constraint firstItem="gVp-ND-Gdb" firstAttribute="leading" secondItem="SI3-e1-D9B" secondAttribute="leading" id="mEW-i0-bwv"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="PmU-Zt-r8g" secondAttribute="trailing" constant="20" id="wCc-Ho-4y6"/>
+                            <constraint firstItem="dUi-8Y-F9m" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="xLP-01-h8t"/>
                             <constraint firstItem="cIX-7v-fyZ" firstAttribute="top" secondItem="ADb-RQ-2cx" secondAttribute="bottom" constant="20" id="yLC-K3-pVT"/>
                             <constraint firstItem="cIX-7v-fyZ" firstAttribute="centerY" secondItem="ep3-JP-TPh" secondAttribute="centerY" id="zBO-fG-p9T"/>
                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="mi1-Y2-4N3" secondAttribute="trailing" constant="20" id="zTY-br-jmh"/>
@@ -213,12 +275,16 @@
                     </view>
                     <connections>
                         <outlet property="startAtLoginButton" destination="SI3-e1-D9B" id="nPV-ty-UpR"/>
+                        <outlet property="versionLabel" destination="YzI-gg-fg0" id="irq-2W-iPt"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <userDefaultsController representsSharedInstance="YES" id="KYv-Wp-8ng"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="75" y="654"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="AppIcon" width="128" height="128"/>
+    </resources>
 </document>

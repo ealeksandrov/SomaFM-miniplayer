@@ -233,7 +233,6 @@ class MenubarController {
         let notification = NSUserNotification()
         notification.title = stationName
         notification.informativeText = trackName
-        notification.contentImage = NSImage(named: NSImage.Name(rawValue: "groovesalad512"))
         NSUserNotificationCenter.default.deliver(notification)
     }
 }
