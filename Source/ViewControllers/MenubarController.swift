@@ -11,7 +11,7 @@ class MenubarController {
     let rightClickMenu = NSMenu()
     let stationsMenu = NSMenu()
 
-    let trackItem = NSMenuItem(title: "Track", action: nil, keyEquivalent: "")
+    let trackItem = NSMenuItem(title: "...", action: #selector(MenubarController.searchTrack), keyEquivalent: "")
 
     var sortedChannels: [Channel]? {
         guard let channels = SomaAPI.channels, channels.count > 0 else { return nil }
@@ -49,6 +49,7 @@ class MenubarController {
     }
 
     func setupMenu() {
+        trackItem.toolTip = "Click to search this track in iTunes"
         rightClickMenu.addItem(trackItem)
 
         let volumeItem = NSMenuItem(title: "Volume", action: nil, keyEquivalent: "")
@@ -118,10 +119,20 @@ class MenubarController {
     }
 
     @objc func updateTrackName() {
-        trackItem.title = RadioPlayer.currentTrack?.trunc(length: 35) ?? "..."
+        guard let trackName = RadioPlayer.currentTrack, !trackName.isEmpty else {
+            trackItem.title = "..."
+            trackItem.target = nil
+            return
+        }
+
+        trackItem.title = trackName.trunc(length: 35)
+        trackItem.target = self
+
         if Settings.notificationsEnabled {
             showUserNotification()
         }
+
+        MusicSearchAPI.searchTrack()
     }
 
     @objc func updatePlaybackState() {
@@ -182,6 +193,12 @@ class MenubarController {
 
         let newIndex = lastPlayedIndex == sortedChannels.count - 1 ? 0 : lastPlayedIndex + 1
         selectChannel(sortedChannels[newIndex])
+    }
+
+    @objc func searchTrack() {
+        guard let trackURL = MusicSearchAPI.trackSearchURL else { return }
+
+        NSWorkspace.shared.open(trackURL)
     }
 
     // MARK: - Private

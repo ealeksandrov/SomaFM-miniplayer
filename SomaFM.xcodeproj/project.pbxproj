@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		55649B171FACEC410002006C /* MusicSearchAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55649B161FACEC410002006C /* MusicSearchAPI.swift */; };
+		55649B191FACF0EF0002006C /* SearchResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55649B181FACF0EF0002006C /* SearchResult.swift */; };
 		556877981F83E33800F6B866 /* MenubarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556877971F83E33800F6B866 /* MenubarController.swift */; };
 		5576EB301F9F65AA00F30FB9 /* StartAtLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5576EB2F1F9F65AA00F30FB9 /* StartAtLogin.swift */; };
 		558ABBED1F9F345700F2EAD6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558ABBEC1F9F345700F2EAD6 /* AppDelegate.swift */; };
@@ -52,6 +54,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		55649B161FACEC410002006C /* MusicSearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicSearchAPI.swift; sourceTree = "<group>"; };
+		55649B181FACF0EF0002006C /* SearchResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResult.swift; sourceTree = "<group>"; };
 		556877971F83E33800F6B866 /* MenubarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenubarController.swift; sourceTree = "<group>"; };
 		5576EB2F1F9F65AA00F30FB9 /* StartAtLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartAtLogin.swift; sourceTree = "<group>"; };
 		558ABBEA1F9F345700F2EAD6 /* SomaFM-helper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "SomaFM-helper.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -190,6 +194,7 @@
 			children = (
 				55DB7F361F82C458009C3E0E /* Models */,
 				55DB7F3B1F82CBF6009C3E0E /* SomaAPI.swift */,
+				55649B161FACEC410002006C /* MusicSearchAPI.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 			children = (
 				55DB7F371F82C488009C3E0E /* Channel.swift */,
 				55DB7F391F82C552009C3E0E /* Playlist.swift */,
+				55649B181FACF0EF0002006C /* SearchResult.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -357,7 +363,9 @@
 				558AD6D91F82C119000013B1 /* PreferencesViewController.swift in Sources */,
 				55DB7F381F82C488009C3E0E /* Channel.swift in Sources */,
 				558AD6D81F82C116000013B1 /* Log.swift in Sources */,
+				55649B191FACF0EF0002006C /* SearchResult.swift in Sources */,
 				5576EB301F9F65AA00F30FB9 /* StartAtLogin.swift in Sources */,
+				55649B171FACEC410002006C /* MusicSearchAPI.swift in Sources */,
 				55E0113A1F8579FF00C499D1 /* Settings.swift in Sources */,
 				558AD6D11F82BF6F000013B1 /* AppDelegate.swift in Sources */,
 				55DB7F3A1F82C552009C3E0E /* Playlist.swift in Sources */,
