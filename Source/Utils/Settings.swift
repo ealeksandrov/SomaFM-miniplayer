@@ -17,6 +17,7 @@ enum UserDefaultsKey {
 enum ChannelsSortOrder: Int {
     case `default`
     case listeners
+    case alphabetically
 }
 
 struct Settings {

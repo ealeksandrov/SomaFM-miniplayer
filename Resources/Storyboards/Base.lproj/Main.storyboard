@@ -175,6 +175,7 @@
                                         <items>
                                             <menuItem title="Default" state="on" id="tk1-zz-WT8"/>
                                             <menuItem title="# of listeners" id="MKH-Cy-Xlh"/>
+                                            <menuItem title="Alphabetically" id="R5C-XL-oai"/>
                                         </items>
                                     </menu>
                                 </popUpButtonCell>

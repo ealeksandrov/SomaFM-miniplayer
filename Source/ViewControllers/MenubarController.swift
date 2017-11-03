@@ -18,6 +18,8 @@ class MenubarController {
 
         if Settings.channelsSortOrder == .listeners {
             return channels.sorted { $0.listeners > $1.listeners }
+        } else if Settings.channelsSortOrder == .alphabetically {
+            return channels.sorted { $0.title < $1.title }
         } else {
             return channels
         }
