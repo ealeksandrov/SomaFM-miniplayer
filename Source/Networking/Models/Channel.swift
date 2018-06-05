@@ -8,17 +8,16 @@ import Foundation
 public struct Channel: Codable {
     let id: String
     let title: String
-    let description: String
-    let dj: String
-    let djmail: String
-    let genre: String
-    let image: URL
+    let description: String?
+    let dj: String?
+    let genre: String?
+    let image: URL?
     let largeimage: URL?
     let xlimage: URL?
-    let twitter: String
+    let twitter: String?
     let updated: String
     let listeners: Int
-    let lastPlaying: String
+    let lastPlaying: String?
 
     let playlists: [Playlist]
 
@@ -41,14 +40,13 @@ public struct Channel: Codable {
 
         self.id = try container.decode(String.self, forKey: .id)
         self.title = try container.decode(String.self, forKey: .title)
-        self.description = try container.decode(String.self, forKey: .title)
-        self.dj = try container.decode(String.self, forKey: .dj)
-        self.djmail = try container.decode(String.self, forKey: .djmail)
-        self.genre = try container.decode(String.self, forKey: .genre)
-        self.image = try container.decode(URL.self, forKey: .image)
+        self.description = try? container.decode(String.self, forKey: .title)
+        self.dj = try? container.decode(String.self, forKey: .dj)
+        self.genre = try? container.decode(String.self, forKey: .genre)
+        self.image = try? container.decode(URL.self, forKey: .image)
         self.largeimage = try? container.decode(URL.self, forKey: .largeimage)
         self.xlimage = try? container.decode(URL.self, forKey: .xlimage)
-        self.twitter = try container.decode(String.self, forKey: .twitter)
+        self.twitter = try? container.decode(String.self, forKey: .twitter)
         self.updated = try container.decode(String.self, forKey: .updated)
         if let listenersString = try? container.decode(String.self, forKey: .listeners) {
             self.listeners = Int(listenersString) ?? 0
@@ -57,7 +55,7 @@ public struct Channel: Codable {
         } else {
             self.listeners = 0
         }
-        self.lastPlaying = try container.decode(String.self, forKey: .lastPlaying)
+        self.lastPlaying = try? container.decode(String.self, forKey: .lastPlaying)
 
         self.playlists = try container.decode([Playlist].self, forKey: .playlists)
     }
