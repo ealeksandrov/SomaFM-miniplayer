@@ -4,6 +4,7 @@
 //  Copyright © 2017 Evgeny Aleksandrov. All rights reserved.
 
 import Cocoa
+import Reachability
 
 class MenubarController {
     let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
@@ -30,6 +31,7 @@ class MenubarController {
 
         setupStatusItem()
         setupMenu()
+        setupReachability()
 
         if Settings.shouldPlayOnLaunch {
             togglePlay()
@@ -121,6 +123,12 @@ class MenubarController {
     }
 
     @objc func updateTrackName() {
+        if reachability.connection == .none, RadioPlayer.player.timeControlStatus == .paused {
+            trackItem.title = "Network unavailable"
+            trackItem.target = nil
+            return
+        }
+
         guard let trackName = RadioPlayer.currentTrack, !trackName.isEmpty else {
             trackItem.title = "..."
             trackItem.target = nil
@@ -166,14 +174,20 @@ class MenubarController {
     }
 
     @objc func togglePlay() {
-        if RadioPlayer.player.timeControlStatus == .paused {
-            if RadioPlayer.player.currentItem != nil {
-                RadioPlayer.resumeLive()
-            } else if let savedChannel = SomaAPI.lastPlayedChannel {
-                selectChannel(savedChannel)
-            }
-        } else {
+        if RadioPlayer.player.timeControlStatus != .paused {
             RadioPlayer.player.pause()
+            return
+        }
+
+        guard reachability.connection != .none else {
+            showConnectionError()
+            return
+        }
+
+        if RadioPlayer.player.currentItem != nil {
+            RadioPlayer.resumeLive()
+        } else if let savedChannel = SomaAPI.lastPlayedChannel {
+            selectChannel(savedChannel)
         }
     }
 
@@ -207,6 +221,10 @@ class MenubarController {
 
     private func selectChannel(_ channel: Channel) {
         guard let channels = SomaAPI.channels, let selectedChannelIdx = channels.index(where: { $0.id == channel.id }) else { return }
+        guard reachability.connection != .none else {
+            showConnectionError()
+            return
+        }
 
         stationsMenu.items.forEach { $0.state = $0.tag == selectedChannelIdx ? .on : .off }
 
@@ -236,5 +254,36 @@ class MenubarController {
         notification.title = stationName
         notification.informativeText = trackName
         NSUserNotificationCenter.default.deliver(notification)
+    }
+
+    // MARK: - Reachability
+
+    let reachability = Reachability(hostname: "api.somafm.com")!
+
+    private func setupReachability() {
+        reachability.whenReachable = { _ in
+            self.updateTrackName()
+        }
+        reachability.whenUnreachable = { _ in
+            self.updateTrackName()
+        }
+        do {
+            try reachability.startNotifier()
+        } catch {
+            Log.error("Reachability error")
+        }
+    }
+
+    private func showConnectionError() {
+        setStatusItem(playing: true)
+
+        let notification = NSUserNotification()
+        notification.title = "Network error"
+        notification.informativeText = "Can't connect to SomaFM.com"
+        NSUserNotificationCenter.default.deliver(notification)
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            self.setStatusItem(playing: false)
+        }
     }
 }
