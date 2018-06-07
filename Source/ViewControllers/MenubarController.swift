@@ -123,7 +123,7 @@ class MenubarController {
     }
 
     @objc func updateTrackName() {
-        if reachability.connection == .none, RadioPlayer.player.timeControlStatus == .paused {
+        if reachability.connection == .none, RadioPlayer.player.timeControlStatus != .playing {
             trackItem.title = "Network unavailable"
             trackItem.target = nil
             return
@@ -135,7 +135,10 @@ class MenubarController {
             return
         }
 
-        trackItem.title = trackName.trunc(length: 35)
+        let truncatedTrackName = trackName.trunc(length: 35)
+        guard truncatedTrackName != trackItem.title else { return }
+
+        trackItem.title = truncatedTrackName
         trackItem.target = self
 
         if Settings.notificationsEnabled {
@@ -146,6 +149,7 @@ class MenubarController {
     }
 
     @objc func updatePlaybackState() {
+        setupRecoveringTimerIfNeeded()
         setStatusItem(playing: RadioPlayer.player.timeControlStatus != .paused)
     }
 
@@ -259,10 +263,12 @@ class MenubarController {
     // MARK: - Reachability
 
     let reachability = Reachability(hostname: "api.somafm.com")!
+    private var resumePlaybackTimer: Timer?
 
     private func setupReachability() {
         reachability.whenReachable = { _ in
             self.updateTrackName()
+            self.recoverFromConnectionErrorIfNeeded()
         }
         reachability.whenUnreachable = { _ in
             self.updateTrackName()
@@ -274,7 +280,29 @@ class MenubarController {
         }
     }
 
-    private func showConnectionError() {
+    private func setupRecoveringTimerIfNeeded() {
+        guard reachability.connection == .none, RadioPlayer.player.timeControlStatus == .waitingToPlayAtSpecifiedRate else { return }
+
+        resumePlaybackTimer?.invalidate()
+        resumePlaybackTimer = Timer.scheduledTimer(timeInterval: 5,
+                                                   target: self,
+                                                   selector: #selector(MenubarController.showConnectionError),
+                                                   userInfo: nil,
+                                                   repeats: false)
+    }
+
+    private func recoverFromConnectionErrorIfNeeded() {
+        resumePlaybackTimer?.invalidate()
+        guard RadioPlayer.player.timeControlStatus != .paused else { return }
+
+        RadioPlayer.resumeLive()
+    }
+
+    @objc func showConnectionError() {
+        resumePlaybackTimer?.invalidate()
+        updateTrackName()
+
+        RadioPlayer.player.pause()
         setStatusItem(playing: true)
 
         let notification = NSUserNotification()

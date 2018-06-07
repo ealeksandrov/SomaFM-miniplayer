@@ -17,7 +17,10 @@ struct RadioPlayer {
 
     static var player: AVPlayer = {
         $0.volume = Settings.volume
-        timeControlStatusToken = $0.observe(\.timeControlStatus) { _, _ in
+        timeControlStatusToken = $0.observe(\.timeControlStatus) { player, _ in
+            if player.timeControlStatus == .paused {
+                currentTrack = nil
+            }
             NotificationCenter.default.post(name: .radioPlayerStateUpdated, object: nil)
         }
         metadataToken = $0.observe(\.currentItem?.timedMetadata) { player, _ in
