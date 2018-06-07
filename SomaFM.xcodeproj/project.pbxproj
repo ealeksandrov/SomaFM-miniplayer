@@ -21,6 +21,8 @@
 		558AD6D81F82C116000013B1 /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558AD6D71F82C114000013B1 /* Log.swift */; };
 		558AD6D91F82C119000013B1 /* PreferencesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 558AD6D51F82C114000013B1 /* PreferencesViewController.swift */; };
 		55B994D11F9E19EB0045844D /* String+Truncate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55B994D01F9E19EB0045844D /* String+Truncate.swift */; };
+		55C2006620C96D370008833D /* Reachability.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55C2006520C96D370008833D /* Reachability.framework */; };
+		55C2006720C96D370008833D /* Reachability.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55C2006520C96D370008833D /* Reachability.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55D4A9CB1F9E6688000227E0 /* MediaKeyTap.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 55D4A9CA1F9E6688000227E0 /* MediaKeyTap.framework */; };
 		55D4A9CC1F9E6688000227E0 /* MediaKeyTap.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 55D4A9CA1F9E6688000227E0 /* MediaKeyTap.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		55DB7F381F82C488009C3E0E /* Channel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55DB7F371F82C488009C3E0E /* Channel.swift */; };
@@ -38,6 +40,7 @@
 			dstSubfolderSpec = 10;
 			files = (
 				55D4A9CC1F9E6688000227E0 /* MediaKeyTap.framework in Embed Frameworks */,
+				55C2006720C96D370008833D /* Reachability.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -74,6 +77,7 @@
 		558AD6D51F82C114000013B1 /* PreferencesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferencesViewController.swift; sourceTree = "<group>"; };
 		558AD6D71F82C114000013B1 /* Log.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		55B994D01F9E19EB0045844D /* String+Truncate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Truncate.swift"; sourceTree = "<group>"; };
+		55C2006520C96D370008833D /* Reachability.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Reachability.framework; path = ../Carthage/Build/Mac/Reachability.framework; sourceTree = "<group>"; };
 		55D4A9CA1F9E6688000227E0 /* MediaKeyTap.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaKeyTap.framework; path = ../Carthage/Build/Mac/MediaKeyTap.framework; sourceTree = "<group>"; };
 		55DB7F371F82C488009C3E0E /* Channel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Channel.swift; sourceTree = "<group>"; };
 		55DB7F391F82C552009C3E0E /* Playlist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Playlist.swift; sourceTree = "<group>"; };
@@ -95,6 +99,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				55D4A9CB1F9E6688000227E0 /* MediaKeyTap.framework in Frameworks */,
+				55C2006620C96D370008833D /* Reachability.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,6 +169,7 @@
 		558AD6CB1F82BF34000013B1 /* Supporting-files */ = {
 			isa = PBXGroup;
 			children = (
+				55C2006520C96D370008833D /* Reachability.framework */,
 				55D4A9CA1F9E6688000227E0 /* MediaKeyTap.framework */,
 				558AD6CC1F82BF34000013B1 /* SomaFM.entitlements */,
 				558AD6CD1F82BF34000013B1 /* Info.plist */,
