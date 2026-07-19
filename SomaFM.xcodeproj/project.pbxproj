@@ -198,6 +198,7 @@
 			inputFileListPaths = (
 			);
 			inputPaths = (
+				"$(TARGET_BUILD_DIR)/$(INFOPLIST_PATH)",
 			);
 			name = "Update Build Number";
 			outputFileListPaths = (
