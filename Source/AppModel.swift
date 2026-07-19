@@ -41,7 +41,7 @@ func existingChannelIDs(_ ids: [String], in channels: [Channel]) -> [String] {
     return ids.filter(validIDs.contains)
 }
 
-struct PlayOnLaunchGate: Sendable {
+struct PlayOnLaunchGate {
     private var isPending: Bool
 
     init(enabled: Bool) {
@@ -94,7 +94,9 @@ final class AppModel {
     }
 
     var loginItemMessage: String? {
-        if let loginItemError { return loginItemError }
+        if let loginItemError {
+            return loginItemError
+        }
 
         switch loginItemStatus {
         case .enabled, .notRegistered:
@@ -228,7 +230,8 @@ final class AppModel {
 
     func refreshSystemSettings() async {
         loginItemStatus = SMAppService.mainApp.status
-        notificationAuthorizationStatus = await UNUserNotificationCenter.current().notificationSettings().authorizationStatus
+        notificationAuthorizationStatus = await UNUserNotificationCenter.current().notificationSettings()
+            .authorizationStatus
     }
 
     func notificationPreferenceChanged(enabled: Bool) async {
@@ -295,6 +298,7 @@ final class AppModel {
     }
 
     private func refreshNotificationStatus() async {
-        notificationAuthorizationStatus = await UNUserNotificationCenter.current().notificationSettings().authorizationStatus
+        notificationAuthorizationStatus = await UNUserNotificationCenter.current().notificationSettings()
+            .authorizationStatus
     }
 }

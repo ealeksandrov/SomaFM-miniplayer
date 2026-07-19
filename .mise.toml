@@ -1,0 +1,10 @@
+[tools]
+swiftformat = "0.62.1"
+
+[tasks.lint]
+description = "Run SwiftFormat in lint mode"
+run = "swiftformat --lint --lenient ."
+
+[tasks.format]
+description = "Run SwiftFormat"
+run = "swiftformat ."

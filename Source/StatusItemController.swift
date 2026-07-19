@@ -35,7 +35,7 @@ final class StatusItemController: NSObject {
         } onChange: { [weak self] in
             Task { @MainActor [weak self] in
                 guard let self else { return }
-                self.observeModel()
+                observeModel()
             }
         }
     }
@@ -50,7 +50,7 @@ final class StatusItemController: NSObject {
 
         let station = model.selectedChannel?.title
         let state = stateDescription
-        let details = [station, model.currentTrack].compactMap { $0 }.joined(separator: " — ")
+        let details = [station, model.currentTrack].compactMap(\.self).joined(separator: " — ")
         let value = details.isEmpty ? state : "\(state): \(details)"
         button.setAccessibilityValue(value)
         button.toolTip = [value, "Left click to play or pause", "Right click to open menu"].joined(separator: "\n")
@@ -59,8 +59,12 @@ final class StatusItemController: NSObject {
     }
 
     private var stateDescription: String {
-        if model.isLoadingChannels && model.channels.isEmpty { return "Loading stations" }
-        if let catalogError = model.catalogError, model.channels.isEmpty { return catalogError }
+        if model.isLoadingChannels, model.channels.isEmpty {
+            return "Loading stations"
+        }
+        if let catalogError = model.catalogError, model.channels.isEmpty {
+            return catalogError
+        }
 
         return switch model.playbackState {
         case .idle: "Ready"
@@ -86,7 +90,7 @@ final class StatusItemController: NSObject {
     }
 
     private func showMenu(relativeTo button: NSStatusBarButton) {
-        if model.channels.isEmpty && !model.isLoadingChannels {
+        if model.channels.isEmpty, !model.isLoadingChannels {
             Task { await model.start() }
         }
         rebuildMenu()
@@ -107,7 +111,7 @@ final class StatusItemController: NSObject {
         volumeItem.view = makeVolumeView()
         menu.addItem(volumeItem)
 
-        if AppSettings.showsRecentStations && !model.recentChannels.isEmpty {
+        if AppSettings.showsRecentStations, !model.recentChannels.isEmpty {
             menu.addItem(.separator())
             let heading = NSMenuItem(title: "Recent Stations", action: nil, keyEquivalent: "")
             heading.isEnabled = false
@@ -278,11 +282,11 @@ final class StatusItemController: NSObject {
     @objc private func openSettings() {
         guard let mainMenu = NSApp.mainMenu,
               let item = mainMenu.items
-                .compactMap(\.submenu)
-                .flatMap(\.items)
-                .first(where: {
-                    $0.keyEquivalent == "," && $0.keyEquivalentModifierMask.contains(.command)
-                }),
+              .compactMap(\.submenu)
+              .flatMap(\.items)
+              .first(where: {
+                  $0.keyEquivalent == "," && $0.keyEquivalentModifierMask.contains(.command)
+              }),
               let action = item.action else { return }
         guard NSApp.sendAction(action, to: item.target, from: item) else { return }
         DispatchQueue.main.async {

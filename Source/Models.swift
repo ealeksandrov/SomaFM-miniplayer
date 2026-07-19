@@ -1,11 +1,13 @@
 import Foundation
 
-enum ChannelsSortOrder: Int, CaseIterable, Identifiable, Sendable {
+enum ChannelsSortOrder: Int, CaseIterable, Identifiable {
     case `default`
     case listeners
     case alphabetically
 
-    var id: Int { rawValue }
+    var id: Int {
+        rawValue
+    }
 
     var title: String {
         switch self {
@@ -16,13 +18,15 @@ enum ChannelsSortOrder: Int, CaseIterable, Identifiable, Sendable {
     }
 }
 
-enum TrackAction: String, CaseIterable, Identifiable, Sendable {
+enum TrackAction: String, CaseIterable, Identifiable {
     case copy
     case google
     case youtube
     case appleMusic
 
-    var id: String { rawValue }
+    var id: String {
+        rawValue
+    }
 
     var title: String {
         switch self {
@@ -54,14 +58,14 @@ enum TrackAction: String, CaseIterable, Identifiable, Sendable {
     }
 }
 
-struct Playlist: Codable, Equatable, Sendable {
-    enum Format: String, Codable, Sendable {
+struct Playlist: Codable, Equatable {
+    enum Format: String, Codable {
         case aac
         case aacp
         case mp3
     }
 
-    enum Quality: String, Codable, Sendable {
+    enum Quality: String, Codable {
         case highest
         case high
         case low
@@ -82,7 +86,11 @@ struct Playlist: Codable, Equatable, Sendable {
         let url = try container.decode(URL.self, forKey: .url)
 
         guard url.scheme?.lowercased() == "https" else {
-            throw DecodingError.dataCorruptedError(forKey: .url, in: container, debugDescription: "Only HTTPS playlists are supported")
+            throw DecodingError.dataCorruptedError(
+                forKey: .url,
+                in: container,
+                debugDescription: "Only HTTPS playlists are supported"
+            )
         }
 
         self.url = url
@@ -91,7 +99,7 @@ struct Playlist: Codable, Equatable, Sendable {
     }
 }
 
-struct Channel: Codable, Equatable, Identifiable, Sendable {
+struct Channel: Codable, Equatable, Identifiable {
     let id: String
     let title: String
     let description: String?

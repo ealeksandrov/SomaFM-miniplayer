@@ -2,7 +2,7 @@
 import Foundation
 @preconcurrency import MediaPlayer
 
-enum PlaybackState: String, Sendable {
+enum PlaybackState: String {
     case idle
     case loading
     case playing
@@ -118,7 +118,10 @@ final class RadioPlayer: NSObject {
     }
 
     private func observePlayer() {
-        timeControlObservation = player.observe(\.timeControlStatus, options: [.initial, .new]) { [weak self] player, _ in
+        timeControlObservation = player.observe(\.timeControlStatus, options: [
+            .initial,
+            .new
+        ]) { [weak self] player, _ in
             let status = player.timeControlStatus
             Task { @MainActor [weak self] in
                 self?.handleTimeControlStatus(status)
@@ -129,7 +132,8 @@ final class RadioPlayer: NSObject {
     private func installCurrentChannel() {
         guard wantsPlayback,
               let channel = currentChannel,
-              let playlist = channel.bestQualityPlaylist else {
+              let playlist = channel.bestQualityPlaylist
+        else {
             wantsPlayback = false
             transition(to: .failed)
             return
@@ -252,7 +256,7 @@ final class RadioPlayer: NSObject {
                           activeGeneration: self.generation,
                           wantsPlayback: self.wantsPlayback
                       ) else { return }
-                self.installCurrentChannel()
+                installCurrentChannel()
             }
             return
         }
@@ -336,11 +340,10 @@ final class RadioPlayer: NSObject {
     private nonisolated static func performOnMain(
         _ action: @MainActor @Sendable () -> Bool
     ) -> MPRemoteCommandHandlerStatus {
-        let succeeded: Bool
-        if Thread.isMainThread {
-            succeeded = MainActor.assumeIsolated { action() }
+        let succeeded: Bool = if Thread.isMainThread {
+            MainActor.assumeIsolated { action() }
         } else {
-            succeeded = DispatchQueue.main.sync {
+            DispatchQueue.main.sync {
                 MainActor.assumeIsolated { action() }
             }
         }
@@ -376,7 +379,7 @@ extension RadioPlayer: @preconcurrency AVPlayerItemMetadataOutputPushDelegate {
     func metadataOutput(
         _ output: AVPlayerItemMetadataOutput,
         didOutputTimedMetadataGroups groups: [AVTimedMetadataGroup],
-        from track: AVPlayerItemTrack?
+        from _: AVPlayerItemTrack?
     ) {
         let outputID = ObjectIdentifier(output)
         Task { [weak self] in

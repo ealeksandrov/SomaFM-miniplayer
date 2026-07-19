@@ -1,7 +1,7 @@
 import AppKit
 import Foundation
-import Testing
 @testable import SomaFM_miniplayer
+import Testing
 
 private final class BundleToken {}
 
@@ -12,7 +12,8 @@ struct SomaFMTests {
         let channels = try SomaAPI.decodeChannels(from: Data(contentsOf: url))
 
         #expect(channels.count == 46)
-        #expect(channels.first { $0.id == "7soul" }?.description == "Vintage soul tracks from the original 45 RPM vinyl.")
+        #expect(channels.first { $0.id == "7soul" }?
+            .description == "Vintage soul tracks from the original 45 RPM vinyl.")
         #expect(channels.allSatisfy { $0.bestQualityPlaylist != nil })
     }
 

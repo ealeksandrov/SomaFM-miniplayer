@@ -1,6 +1,6 @@
 import Foundation
 
-struct SomaAPI: Sendable {
+struct SomaAPI {
     enum APIError: LocalizedError {
         case invalidResponse
         case emptyCatalog
@@ -31,7 +31,7 @@ struct SomaAPI: Sendable {
     func loadChannels() async throws -> [Channel] {
         let (data, response) = try await URLSession.shared.data(from: Self.channelsURL)
 
-        guard let response = response as? HTTPURLResponse, (200..<300).contains(response.statusCode) else {
+        guard let response = response as? HTTPURLResponse, (200 ..< 300).contains(response.statusCode) else {
             throw APIError.invalidResponse
         }
 
@@ -43,7 +43,7 @@ struct SomaAPI: Sendable {
     func loadCachedChannels() -> [Channel]? {
         let currentURL = Self.cacheURL
 
-        for url in [currentURL, Self.legacyCacheURL].compactMap({ $0 }) {
+        for url in [currentURL, Self.legacyCacheURL].compactMap(\.self) {
             guard let data = try? Data(contentsOf: url),
                   let channels = try? Self.decodeChannels(from: data).filter({ $0.bestQualityPlaylist != nil }),
                   !channels.isEmpty else { continue }

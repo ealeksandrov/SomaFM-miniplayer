@@ -25,25 +25,25 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     let model = AppModel()
     private var statusItemController: StatusItemController?
 
-    func applicationDidFinishLaunching(_ notification: Notification) {
+    func applicationDidFinishLaunching(_: Notification) {
         UNUserNotificationCenter.current().delegate = self
         statusItemController = StatusItemController(model: model)
         Task { await model.start() }
     }
 
-    func applicationDidBecomeActive(_ notification: Notification) {
+    func applicationDidBecomeActive(_: Notification) {
         Task { await model.refreshSystemSettings() }
     }
 
-    func applicationWillTerminate(_ notification: Notification) {
+    func applicationWillTerminate(_: Notification) {
         model.shutdown()
     }
 }
 
 extension AppDelegate: UNUserNotificationCenterDelegate {
     nonisolated func userNotificationCenter(
-        _ center: UNUserNotificationCenter,
-        willPresent notification: UNNotification
+        _: UNUserNotificationCenter,
+        willPresent _: UNNotification
     ) async -> UNNotificationPresentationOptions {
         [.banner]
     }

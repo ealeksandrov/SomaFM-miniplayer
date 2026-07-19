@@ -26,7 +26,8 @@ enum AppSettings {
 
     static var channelsSortOrder: ChannelsSortOrder {
         get {
-            ChannelsSortOrder(rawValue: UserDefaults.standard.integer(forKey: UserDefaultsKey.apiChannelsSortOrder)) ?? .default
+            ChannelsSortOrder(rawValue: UserDefaults.standard.integer(forKey: UserDefaultsKey.apiChannelsSortOrder)) ??
+                .default
         }
         set {
             UserDefaults.standard.set(newValue.rawValue, forKey: UserDefaultsKey.apiChannelsSortOrder)
