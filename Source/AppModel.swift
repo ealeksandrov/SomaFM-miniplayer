@@ -99,12 +99,10 @@ final class AppModel {
         }
 
         switch loginItemStatus {
-        case .enabled, .notRegistered:
+        case .enabled, .notRegistered, .notFound:
             return nil
         case .requiresApproval:
             return "Allow SomaFM in System Settings > General > Login Items."
-        case .notFound:
-            return "macOS could not find the login item. Move SomaFM to Applications and try again."
         @unknown default:
             return "Login item status is unavailable."
         }
@@ -209,7 +207,7 @@ final class AppModel {
 
         do {
             if enabled {
-                if service.status == .notRegistered {
+                if service.status == .notRegistered || service.status == .notFound {
                     try service.register()
                 } else if service.status == .requiresApproval {
                     SMAppService.openSystemSettingsLoginItems()
