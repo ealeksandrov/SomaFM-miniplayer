@@ -130,7 +130,7 @@ struct SettingsView: View {
 
         return switch model.notificationAuthorizationStatus {
         case .denied:
-            "Track notifications are disabled in System Settings."
+            "Notifications are disabled in System Settings."
         case .authorized, .provisional, .ephemeral, .notDetermined:
             nil
         @unknown default:
