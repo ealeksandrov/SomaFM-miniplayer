@@ -3,7 +3,7 @@
 [![CI](https://github.com/ealeksandrov/SomaFM-miniplayer/actions/workflows/test.yml/badge.svg)](https://github.com/ealeksandrov/SomaFM-miniplayer/actions/workflows/test.yml)
 [![Latest Release](https://img.shields.io/github/release/ealeksandrov/SomaFM-miniplayer.svg)](https://github.com/ealeksandrov/SomaFM-miniplayer/releases/latest)
 [![License](https://img.shields.io/github/license/ealeksandrov/SomaFM-miniplayer.svg)](LICENSE.md)
-![Platform](https://img.shields.io/badge/platform-macOS%2014+-lightgrey.svg)
+![Platform](https://img.shields.io/badge/platform-macOS%2014+-blue.svg)
 
 ![Screenshot](01.jpg)
 
