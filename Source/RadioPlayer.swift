@@ -116,8 +116,10 @@ final class RadioPlayer: NSObject {
     ) -> Bool {
         wantsPlayback && callbackGeneration == activeGeneration
     }
+}
 
-    private func observePlayer() {
+private extension RadioPlayer {
+    func observePlayer() {
         timeControlObservation = player.observe(\.timeControlStatus, options: [
             .initial,
             .new
@@ -129,7 +131,7 @@ final class RadioPlayer: NSObject {
         }
     }
 
-    private func installCurrentChannel() {
+    func installCurrentChannel() {
         guard wantsPlayback,
               let channel = currentChannel,
               let playlist = channel.bestQualityPlaylist
@@ -187,7 +189,7 @@ final class RadioPlayer: NSObject {
         player.play()
     }
 
-    private func removeItemObservers() {
+    func removeItemObservers() {
         itemStatusObservation = nil
         metadataOutput?.setDelegate(nil, queue: nil)
         metadataOutput = nil
@@ -202,7 +204,7 @@ final class RadioPlayer: NSObject {
         stalledToken = nil
     }
 
-    private func handleTimeControlStatus(_ status: AVPlayer.TimeControlStatus) {
+    func handleTimeControlStatus(_ status: AVPlayer.TimeControlStatus) {
         guard wantsPlayback else { return }
 
         switch status {
@@ -218,7 +220,7 @@ final class RadioPlayer: NSObject {
         }
     }
 
-    private func handleItemStatus(_ status: AVPlayerItem.Status, generation itemGeneration: UInt) {
+    func handleItemStatus(_ status: AVPlayerItem.Status, generation itemGeneration: UInt) {
         guard Self.acceptsCallback(
             callbackGeneration: itemGeneration,
             activeGeneration: generation,
@@ -230,7 +232,7 @@ final class RadioPlayer: NSObject {
         }
     }
 
-    private func handleTerminalFailure(generation failedGeneration: UInt) {
+    func handleTerminalFailure(generation failedGeneration: UInt) {
         guard Self.acceptsCallback(
             callbackGeneration: failedGeneration,
             activeGeneration: generation,
@@ -265,7 +267,7 @@ final class RadioPlayer: NSObject {
         transition(to: .failed)
     }
 
-    private func receiveTrack(_ track: String?, outputID: ObjectIdentifier? = nil) {
+    func receiveTrack(_ track: String?, outputID: ObjectIdentifier? = nil) {
         if let outputID {
             guard metadataOutput.map(ObjectIdentifier.init) == outputID else { return }
         }
@@ -276,14 +278,14 @@ final class RadioPlayer: NSObject {
         publishNowPlaying()
     }
 
-    private func transition(to newState: PlaybackState) {
+    func transition(to newState: PlaybackState) {
         guard state != newState else { return }
         state = newState
         stateChanged?(newState)
         publishNowPlaying()
     }
 
-    private func configureRemoteCommands() {
+    func configureRemoteCommands() {
         let center = MPRemoteCommandCenter.shared()
 
         addTarget(to: center.playCommand) { [weak self] in self?.playCommand?() ?? false }
@@ -313,20 +315,20 @@ final class RadioPlayer: NSObject {
         setSupportedCommandsEnabled(false)
     }
 
-    private func addTarget(to command: MPRemoteCommand, action: @escaping @MainActor @Sendable () -> Bool) {
+    func addTarget(to command: MPRemoteCommand, action: @escaping @MainActor @Sendable () -> Bool) {
         let target = command.addTarget { _ in
             Self.performOnMain(action)
         }
         remoteTargets.append((command, target))
     }
 
-    private func activateRemoteCommands() {
+    func activateRemoteCommands() {
         guard !remoteCommandsActive else { return }
         remoteCommandsActive = true
         setSupportedCommandsEnabled(true)
     }
 
-    private func setSupportedCommandsEnabled(_ enabled: Bool) {
+    func setSupportedCommandsEnabled(_ enabled: Bool) {
         let center = MPRemoteCommandCenter.shared()
         [
             center.playCommand,
@@ -337,7 +339,7 @@ final class RadioPlayer: NSObject {
         ].forEach { $0.isEnabled = enabled }
     }
 
-    private nonisolated static func performOnMain(
+    nonisolated static func performOnMain(
         _ action: @MainActor @Sendable () -> Bool
     ) -> MPRemoteCommandHandlerStatus {
         let succeeded: Bool = if Thread.isMainThread {
@@ -350,7 +352,7 @@ final class RadioPlayer: NSObject {
         return succeeded ? .success : .noActionableNowPlayingItem
     }
 
-    private func publishNowPlaying() {
+    func publishNowPlaying() {
         guard remoteCommandsActive, let channel = currentChannel else { return }
 
         let rate = state == .playing ? 1.0 : 0.0

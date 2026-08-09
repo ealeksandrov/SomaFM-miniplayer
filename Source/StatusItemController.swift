@@ -20,8 +20,10 @@ final class StatusItemController: NSObject {
         configureStatusItem()
         observeModel()
     }
+}
 
-    private func configureStatusItem() {
+private extension StatusItemController {
+    func configureStatusItem() {
         guard let button = statusItem.button else { return }
         statusItem.isVisible = true
         menu.autoenablesItems = false
@@ -33,7 +35,7 @@ final class StatusItemController: NSObject {
         updateStatusItem()
     }
 
-    private func observeModel() {
+    func observeModel() {
         withObservationTracking {
             updateStatusItem()
         } onChange: { [weak self] in
@@ -44,7 +46,7 @@ final class StatusItemController: NSObject {
         }
     }
 
-    private func updateStatusItem() {
+    func updateStatusItem() {
         guard let button = statusItem.button else { return }
         applyStatusItemImage()
         button.imagePosition = .imageOnly
@@ -59,12 +61,12 @@ final class StatusItemController: NSObject {
         updateMenuSelection()
     }
 
-    private func applyStatusItemImage() {
+    func applyStatusItemImage() {
         statusItem.button?.image = statusItemImage
         syncPulse()
     }
 
-    private var statusItemImage: NSImage? {
+    var statusItemImage: NSImage? {
         switch model.playbackState {
         case .loading, .waiting: pulseImage(phase: pulsePhase)
         case .playing: statusItemImage(opacity: 1)
@@ -72,7 +74,7 @@ final class StatusItemController: NSObject {
         }
     }
 
-    private func statusItemImage(opacity: CGFloat) -> NSImage? {
+    func statusItemImage(opacity: CGFloat) -> NSImage? {
         guard let artwork = NSImage(named: Self.glyphName) else { return nil }
         return templateImage(size: artwork.size) { rect in
             artwork.draw(in: rect, from: .zero, operation: .sourceOver, fraction: opacity)
@@ -81,7 +83,7 @@ final class StatusItemController: NSObject {
 
     /// Base glyph with a band of full-strength artwork travelling from the centre outwards,
     /// so the waves fill and empty in one continuous sweep. The core stays lit throughout.
-    private func pulseImage(phase: CGFloat) -> NSImage? {
+    func pulseImage(phase: CGFloat) -> NSImage? {
         guard let artwork = NSImage(named: Self.glyphName) else { return nil }
         return templateImage(size: artwork.size) { rect in
             artwork.draw(in: rect, from: .zero, operation: .sourceOver, fraction: 0.5)
@@ -102,13 +104,14 @@ final class StatusItemController: NSObject {
 
             let core = rect.width * 0.13
             context.saveGraphicsState()
-            NSBezierPath(ovalIn: NSRect(x: center.x - core, y: center.y - core, width: core * 2, height: core * 2)).addClip()
+            NSBezierPath(ovalIn: NSRect(x: center.x - core, y: center.y - core, width: core * 2, height: core * 2))
+                .addClip()
             artwork.draw(in: rect, from: .zero, operation: .sourceOver, fraction: 1)
             context.restoreGraphicsState()
         }
     }
 
-    private func templateImage(size: NSSize, draw: @escaping (NSRect) -> Void) -> NSImage {
+    func templateImage(size: NSSize, draw: @escaping (NSRect) -> Void) -> NSImage {
         let image = NSImage(size: size, flipped: false) { rect in
             draw(rect)
             return true
@@ -117,14 +120,14 @@ final class StatusItemController: NSObject {
         return image
     }
 
-    private var pulses: Bool {
+    var pulses: Bool {
         switch model.playbackState {
         case .loading, .waiting: true
         case .idle, .playing, .paused, .failed: false
         }
     }
 
-    private func syncPulse() {
+    func syncPulse() {
         guard pulses else {
             pulseTask?.cancel()
             pulseTask = nil
@@ -134,7 +137,7 @@ final class StatusItemController: NSObject {
         guard pulseTask == nil else { return }
         pulseTask = Task { [weak self] in
             while true {
-                guard (try? await Task.sleep(for: .milliseconds(40))) != nil, let self else { return }
+                guard await (try? Task.sleep(for: .milliseconds(40))) != nil, let self else { return }
                 guard !Task.isCancelled, pulses else { return }
                 pulsePhase = pulsePhase >= 1 ? 0 : pulsePhase + 0.04
                 statusItem.button?.image = pulseImage(phase: pulsePhase)
@@ -142,7 +145,7 @@ final class StatusItemController: NSObject {
         }
     }
 
-    private var stateDescription: String {
+    var stateDescription: String {
         if model.isLoadingChannels, model.channels.isEmpty {
             return "Loading stations"
         }
@@ -160,7 +163,7 @@ final class StatusItemController: NSObject {
         }
     }
 
-    @objc private func handleStatusItemClick(_ sender: NSStatusBarButton) {
+    @objc func handleStatusItemClick(_ sender: NSStatusBarButton) {
         guard let event = NSApp.currentEvent else { return }
         let opensMenu = event.type == .rightMouseUp
             || event.modifierFlags.contains(.control)
@@ -173,7 +176,7 @@ final class StatusItemController: NSObject {
         }
     }
 
-    private func showMenu(relativeTo button: NSStatusBarButton) {
+    func showMenu(relativeTo button: NSStatusBarButton) {
         if model.channels.isEmpty, !model.isLoadingChannels {
             Task { await model.start() }
         }
@@ -183,7 +186,7 @@ final class StatusItemController: NSObject {
         statusItem.menu = nil
     }
 
-    private func rebuildMenu() {
+    func rebuildMenu() {
         menu.removeAllItems()
         statusButton = nil
         stationMenuItems.removeAll(keepingCapacity: true)
@@ -233,7 +236,7 @@ final class StatusItemController: NSObject {
         resizeCustomMenuItems()
     }
 
-    private func makeStatusView() -> NSView {
+    func makeStatusView() -> NSView {
         let status = model.currentTrack ?? stateDescription
         let button = NSButton(title: shortened(status), target: self, action: #selector(performTrackAction))
         button.font = NSFont.menuFont(ofSize: 0)
@@ -255,7 +258,7 @@ final class StatusItemController: NSObject {
         return view
     }
 
-    private func makeVolumeView() -> NSView {
+    func makeVolumeView() -> NSView {
         let view = NSView(frame: NSRect(x: 0, y: 0, width: 240, height: 34))
         let label = NSTextField(labelWithString: "Volume")
         label.frame = NSRect(x: 14, y: 9, width: 52, height: 17)
@@ -277,7 +280,7 @@ final class StatusItemController: NSObject {
         return view
     }
 
-    private func stationItem(for channel: Channel) -> NSMenuItem {
+    func stationItem(for channel: Channel) -> NSMenuItem {
         let item = actionItem(title: channel.title, action: #selector(selectStation(_:)))
         item.representedObject = channel.id
         item.toolTip = channel.description
@@ -286,17 +289,17 @@ final class StatusItemController: NSObject {
         return item
     }
 
-    private func actionItem(title: String, action: Selector) -> NSMenuItem {
+    func actionItem(title: String, action: Selector) -> NSMenuItem {
         let item = NSMenuItem(title: title, action: action, keyEquivalent: "")
         item.target = self
         return item
     }
 
-    private func shortened(_ string: String, limit: Int = 60) -> String {
+    func shortened(_ string: String, limit: Int = 60) -> String {
         string.count > limit ? String(string.prefix(limit - 1)) + "…" : string
     }
 
-    private func updateMenuStatus() {
+    func updateMenuStatus() {
         let status = model.currentTrack ?? stateDescription
         let title = shortened(status)
 
@@ -318,40 +321,40 @@ final class StatusItemController: NSObject {
         resizeCustomMenuItems()
     }
 
-    private func statusToolTip(for status: String) -> String {
+    func statusToolTip(for status: String) -> String {
         model.currentTrack == nil ? status : "\(status)\n\(AppSettings.trackAction.title)"
     }
 
-    private func updateStatusButtonAccessibility(status: String) {
+    func updateStatusButtonAccessibility(status: String) {
         statusButton?.setAccessibilityLabel(model.currentTrack == nil ? "Playback status" : "Current track")
         statusButton?.setAccessibilityValue(status)
         statusButton?.setAccessibilityHelp(model.currentTrack == nil ? nil : AppSettings.trackAction.title)
     }
 
-    private func resizeCustomMenuItems() {
+    func resizeCustomMenuItems() {
         let width = menu.size.width
         for item in menu.items {
             item.view?.frame.size.width = width
         }
     }
 
-    private func updateMenuSelection() {
+    func updateMenuSelection() {
         for item in stationMenuItems {
             item.state = item.representedObject as? String == model.selectedChannelID ? .on : .off
         }
     }
 
-    @objc private func selectStation(_ sender: NSMenuItem) {
+    @objc func selectStation(_ sender: NSMenuItem) {
         guard let id = sender.representedObject as? String else { return }
         _ = model.selectChannel(id: id)
         updateMenuSelection()
     }
 
-    @objc private func updateVolume(_ sender: NSSlider) {
+    @objc func updateVolume(_ sender: NSSlider) {
         model.setVolume(sender.floatValue)
     }
 
-    @objc private func performTrackAction() {
+    @objc func performTrackAction() {
         guard let track = model.currentTrack else { return }
         menu.cancelTracking()
 
@@ -365,7 +368,7 @@ final class StatusItemController: NSObject {
         }
     }
 
-    @objc private func openSettings() {
+    @objc func openSettings() {
         guard let mainMenu = NSApp.mainMenu,
               let item = mainMenu.items
               .compactMap(\.submenu)
