@@ -35,6 +35,18 @@ struct SettingsView: View {
                 if let notificationStatusText {
                     warning(notificationStatusText)
                 }
+
+                Picker("Left click:", selection: $leftClickRaw) {
+                    ForEach(MenuBarClickAction.allCases) { action in
+                        Text(action.title).tag(action.rawValue)
+                    }
+                }
+
+                Picker("Click a track:", selection: $trackActionRaw) {
+                    ForEach(TrackAction.allCases) { action in
+                        Text(action.title).tag(action.rawValue)
+                    }
+                }
             }
             .fixedSize(horizontal: false, vertical: true)
             .tag(0)
@@ -43,18 +55,6 @@ struct SettingsView: View {
             }
 
             Form {
-                Picker("Left click menu bar icon:", selection: $leftClickRaw) {
-                    ForEach(MenuBarClickAction.allCases) { action in
-                        Text(action.title).tag(action.rawValue)
-                    }
-                }
-
-                Picker("Clicking a track:", selection: $trackActionRaw) {
-                    ForEach(TrackAction.allCases) { action in
-                        Text(action.title).tag(action.rawValue)
-                    }
-                }
-
                 Picker("Station order:", selection: $sortOrderRaw) {
                     ForEach(ChannelsSortOrder.allCases) { order in
                         Text(order.title).tag(order.rawValue)
