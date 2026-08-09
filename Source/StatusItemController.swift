@@ -94,7 +94,7 @@ final class StatusItemController: NSObject {
             Task { await model.start() }
         }
         rebuildMenu()
-        menu.popUp(positioning: nil, at: NSPoint(x: 0, y: button.bounds.minY), in: button)
+        menu.popUp(positioning: nil, at: NSPoint(x: 0, y: button.bounds.maxY), in: button)
     }
 
     private func rebuildMenu() {
