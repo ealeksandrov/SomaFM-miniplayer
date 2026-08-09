@@ -18,6 +18,22 @@ enum ChannelsSortOrder: Int, CaseIterable, Identifiable {
     }
 }
 
+enum MenuBarClickAction: String, CaseIterable, Identifiable {
+    case openMenu
+    case playPause
+
+    var id: String {
+        rawValue
+    }
+
+    var title: String {
+        switch self {
+        case .openMenu: "Open Menu"
+        case .playPause: "Play or Pause"
+        }
+    }
+}
+
 enum TrackAction: String, CaseIterable, Identifiable {
     case copy
     case google

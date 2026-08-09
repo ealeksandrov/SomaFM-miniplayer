@@ -10,6 +10,7 @@ enum UserDefaultsKey {
     static let trackAction = "TrackSearch.Provider"
     static let recentChannelIDs = "SomaFM.RecentChannelIDs"
     static let showsRecentStations = "SomaFM.ShowsRecentStations"
+    static let menuBarLeftClick = "SomaFM.MenuBarLeftClick"
     static let settingsPane = "SomaFM.SettingsPane"
 }
 
@@ -49,6 +50,11 @@ enum AppSettings {
 
     static var trackAction: TrackAction {
         TrackAction(rawValue: UserDefaults.standard.string(forKey: UserDefaultsKey.trackAction) ?? "") ?? .google
+    }
+
+    static var menuBarLeftClick: MenuBarClickAction {
+        MenuBarClickAction(rawValue: UserDefaults.standard.string(forKey: UserDefaultsKey.menuBarLeftClick) ?? "")
+            ?? .openMenu
     }
 
     static var recentChannelIDs: [String] {

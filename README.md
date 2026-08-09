@@ -16,10 +16,11 @@ An unofficial, minimal menu-bar player for [SomaFM](https://somafm.com/).
 
 ## Usage
 
-- Left-click the status item to play or pause.
-- Right-click, Control-click, or Option-click to open the menu.
+- Left-click the status item to open the menu, or switch it to play/pause in Settings.
+- Right-click, Control-click, or Option-click always opens the menu.
+- The menu header shows the station and current track, with a play/pause button beside them.
 - Click the current track to copy it or search with the action selected in Settings.
-- Settings controls launch playback, notifications, station sorting, recent stations, the track action, and Start at Login.
+- Settings controls launch playback, notifications, the left-click action, station sorting, recent stations, the track action, and Start at Login.
 
 ## Building
 

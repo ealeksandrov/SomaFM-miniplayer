@@ -11,6 +11,7 @@ struct SettingsView: View {
     @AppStorage(UserDefaultsKey.apiChannelsSortOrder) private var sortOrderRaw = ChannelsSortOrder.default.rawValue
     @AppStorage(UserDefaultsKey.trackAction) private var trackActionRaw = TrackAction.google.rawValue
     @AppStorage(UserDefaultsKey.showsRecentStations) private var showsRecentStations = true
+    @AppStorage(UserDefaultsKey.menuBarLeftClick) private var leftClickRaw = MenuBarClickAction.openMenu.rawValue
     @AppStorage(UserDefaultsKey.settingsPane) private var selectedPane = 0
 
     var body: some View {
@@ -42,6 +43,12 @@ struct SettingsView: View {
             }
 
             Form {
+                Picker("Left click menu bar icon:", selection: $leftClickRaw) {
+                    ForEach(MenuBarClickAction.allCases) { action in
+                        Text(action.title).tag(action.rawValue)
+                    }
+                }
+
                 Picker("Clicking a track:", selection: $trackActionRaw) {
                     ForEach(TrackAction.allCases) { action in
                         Text(action.title).tag(action.rawValue)
@@ -110,6 +117,9 @@ struct SettingsView: View {
             await model.refreshSystemSettings()
         }
         .onChange(of: sortOrderRaw) {
+            model.settingsDidChange()
+        }
+        .onChange(of: leftClickRaw) {
             model.settingsDidChange()
         }
         .onChange(of: notificationsEnabled) { _, enabled in

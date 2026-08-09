@@ -103,6 +103,11 @@ final class AppModel {
         return sortChannels(channels, by: AppSettings.channelsSortOrder)
     }
 
+    var menuBarLeftClick: MenuBarClickAction {
+        _ = settingsRevision
+        return AppSettings.menuBarLeftClick
+    }
+
     var recentChannels: [Channel] {
         recentChannelIDs.compactMap { id in channels.first { $0.id == id } }
     }

@@ -30,7 +30,6 @@ private extension StatusItemController {
         button.action = #selector(handleStatusItemClick(_:))
         button.sendAction(on: [.leftMouseUp, .rightMouseUp])
         button.setAccessibilityLabel("SomaFM miniplayer")
-        button.setAccessibilityHelp("Left click to play or pause. Right, Control, or Option click to open the menu.")
         updateStatusItem()
     }
 
@@ -50,12 +49,14 @@ private extension StatusItemController {
         applyStatusItemImage()
         button.imagePosition = .imageOnly
 
+        let leftClick = "Left click: \(model.menuBarLeftClick.title)"
         let station = model.selectedChannel?.title
         let state = model.statusDescription
         let details = [station, model.currentTrack].compactMap(\.self).joined(separator: " — ")
         let value = details.isEmpty ? state : "\(state): \(details)"
         button.setAccessibilityValue(value)
-        button.toolTip = [value, "Left click to play or pause", "Right click to open menu"].joined(separator: "\n")
+        button.setAccessibilityHelp("\(leftClick). Right, Control, or Option click opens the menu.")
+        button.toolTip = [value, leftClick, "Right click to open menu"].joined(separator: "\n")
         updateMenuSelection()
     }
 
@@ -148,6 +149,7 @@ private extension StatusItemController {
         let opensMenu = event.type == .rightMouseUp
             || event.modifierFlags.contains(.control)
             || event.modifierFlags.contains(.option)
+            || model.menuBarLeftClick == .openMenu
 
         if opensMenu {
             showMenu(relativeTo: sender)
