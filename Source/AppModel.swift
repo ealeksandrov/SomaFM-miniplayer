@@ -62,7 +62,6 @@ final class AppModel {
     private let player: RadioPlayer
     private let logger = Logger(subsystem: Bundle.main.bundleIdentifier ?? "com.ealeksandrov.somafm", category: "App")
     private var playOnLaunchGate = PlayOnLaunchGate(enabled: AppSettings.shouldPlayOnLaunch)
-    private var settingsRevision = 0
 
     private(set) var channels: [Channel] = []
     private(set) var selectedChannelID = AppSettings.lastPlayedChannelID
@@ -71,6 +70,8 @@ final class AppModel {
     private(set) var isLoadingChannels = false
     private(set) var catalogError: String?
     private(set) var recentChannelIDs = AppSettings.recentChannelIDs
+    private(set) var channelsSortOrder = AppSettings.channelsSortOrder
+    private(set) var menuBarLeftClick = AppSettings.menuBarLeftClick
     private(set) var loginItemStatus = SMAppService.mainApp.status
     private(set) var loginItemError: String?
     private(set) var notificationAuthorizationStatus: UNAuthorizationStatus = .notDetermined
@@ -99,13 +100,7 @@ final class AppModel {
     }
 
     var sortedChannels: [Channel] {
-        _ = settingsRevision
-        return sortChannels(channels, by: AppSettings.channelsSortOrder)
-    }
-
-    var menuBarLeftClick: MenuBarClickAction {
-        _ = settingsRevision
-        return AppSettings.menuBarLeftClick
+        sortChannels(channels, by: channelsSortOrder)
     }
 
     var recentChannels: [Channel] {
@@ -217,7 +212,8 @@ final class AppModel {
     }
 
     func settingsDidChange() {
-        settingsRevision &+= 1
+        channelsSortOrder = AppSettings.channelsSortOrder
+        menuBarLeftClick = AppSettings.menuBarLeftClick
     }
 
     func setStartAtLogin(_ enabled: Bool) {
