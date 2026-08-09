@@ -1,13 +1,12 @@
 import AppKit
 import Observation
-import QuartzCore
+import SwiftUI
 
 @MainActor
 final class StatusItemController: NSObject {
     private let model: AppModel
     private let statusItem = NSStatusBar.system.statusItem(withLength: NSStatusItem.variableLength)
     private let menu = NSMenu()
-    private var statusButton: NSButton?
     private var stationMenuItems: [NSMenuItem] = []
     private var pulseTask: Task<Void, Never>?
     private var pulsePhase: CGFloat = 0
@@ -52,12 +51,11 @@ private extension StatusItemController {
         button.imagePosition = .imageOnly
 
         let station = model.selectedChannel?.title
-        let state = stateDescription
+        let state = model.statusDescription
         let details = [station, model.currentTrack].compactMap(\.self).joined(separator: " — ")
         let value = details.isEmpty ? state : "\(state): \(details)"
         button.setAccessibilityValue(value)
         button.toolTip = [value, "Left click to play or pause", "Right click to open menu"].joined(separator: "\n")
-        updateMenuStatus()
         updateMenuSelection()
     }
 
@@ -145,24 +143,6 @@ private extension StatusItemController {
         }
     }
 
-    var stateDescription: String {
-        if model.isLoadingChannels, model.channels.isEmpty {
-            return "Loading stations"
-        }
-        if let catalogError = model.catalogError, model.channels.isEmpty {
-            return catalogError
-        }
-
-        return switch model.playbackState {
-        case .idle: "Ready"
-        case .loading: "Connecting"
-        case .playing: "Playing"
-        case .waiting: "Waiting for stream"
-        case .paused: "Paused"
-        case .failed: "Playback failed"
-        }
-    }
-
     @objc func handleStatusItemClick(_ sender: NSStatusBarButton) {
         guard let event = NSApp.currentEvent else { return }
         let opensMenu = event.type == .rightMouseUp
@@ -172,7 +152,7 @@ private extension StatusItemController {
         if opensMenu {
             showMenu(relativeTo: sender)
         } else {
-            _ = model.togglePlayback()
+            model.togglePlayback()
         }
     }
 
@@ -188,12 +168,11 @@ private extension StatusItemController {
 
     func rebuildMenu() {
         menu.removeAllItems()
-        statusButton = nil
         stationMenuItems.removeAll(keepingCapacity: true)
 
-        let status = NSMenuItem()
-        status.view = makeStatusView()
-        menu.addItem(status)
+        let header = NSMenuItem()
+        header.view = makeHeaderView()
+        menu.addItem(header)
 
         menu.addItem(.separator())
         let volumeItem = NSMenuItem(title: "Volume", action: nil, keyEquivalent: "")
@@ -236,25 +215,10 @@ private extension StatusItemController {
         resizeCustomMenuItems()
     }
 
-    func makeStatusView() -> NSView {
-        let status = model.currentTrack ?? stateDescription
-        let button = NSButton(title: shortened(status), target: self, action: #selector(performTrackAction))
-        button.font = NSFont.menuFont(ofSize: 0)
-        button.isBordered = false
-        button.alignment = .left
-        button.cell?.lineBreakMode = .byTruncatingTail
-        button.isEnabled = model.currentTrack != nil
-        button.toolTip = statusToolTip(for: status)
-        button.wantsLayer = true
-
-        let width = max(224, ceil(button.intrinsicContentSize.width))
-        button.frame = NSRect(x: 16, y: 0, width: width, height: 22)
-        button.autoresizingMask = [.width]
-
-        let view = NSView(frame: NSRect(x: 0, y: 0, width: width + 32, height: 22))
-        view.addSubview(button)
-        statusButton = button
-        updateStatusButtonAccessibility(status: status)
+    func makeHeaderView() -> NSView {
+        let header = MenuHeaderView(model: model) { [weak self] in self?.performTrackAction() }
+        let view = NSHostingView(rootView: header)
+        view.frame = NSRect(x: 0, y: 0, width: 280, height: 44)
         return view
     }
 
@@ -295,42 +259,6 @@ private extension StatusItemController {
         return item
     }
 
-    func shortened(_ string: String, limit: Int = 60) -> String {
-        string.count > limit ? String(string.prefix(limit - 1)) + "…" : string
-    }
-
-    func updateMenuStatus() {
-        let status = model.currentTrack ?? stateDescription
-        let title = shortened(status)
-
-        if let statusButton, statusButton.title != title {
-            let transition = CATransition()
-            transition.type = .fade
-            transition.duration = 0.15
-            statusButton.layer?.add(transition, forKey: "status")
-            statusButton.title = title
-            statusButton.superview?.frame.size.width = max(
-                statusButton.superview?.frame.width ?? 0,
-                ceil(statusButton.intrinsicContentSize.width) + 32
-            )
-        }
-
-        statusButton?.isEnabled = model.currentTrack != nil
-        statusButton?.toolTip = statusToolTip(for: status)
-        updateStatusButtonAccessibility(status: status)
-        resizeCustomMenuItems()
-    }
-
-    func statusToolTip(for status: String) -> String {
-        model.currentTrack == nil ? status : "\(status)\n\(AppSettings.trackAction.title)"
-    }
-
-    func updateStatusButtonAccessibility(status: String) {
-        statusButton?.setAccessibilityLabel(model.currentTrack == nil ? "Playback status" : "Current track")
-        statusButton?.setAccessibilityValue(status)
-        statusButton?.setAccessibilityHelp(model.currentTrack == nil ? nil : AppSettings.trackAction.title)
-    }
-
     func resizeCustomMenuItems() {
         let width = menu.size.width
         for item in menu.items {
@@ -354,7 +282,7 @@ private extension StatusItemController {
         model.setVolume(sender.floatValue)
     }
 
-    @objc func performTrackAction() {
+    func performTrackAction() {
         guard let track = model.currentTrack else { return }
         menu.cancelTracking()
 

@@ -80,6 +80,24 @@ final class AppModel {
         channels.first { $0.id == selectedChannelID }
     }
 
+    var statusDescription: String {
+        if isLoadingChannels, channels.isEmpty {
+            return "Loading stations"
+        }
+        if let catalogError, channels.isEmpty {
+            return catalogError
+        }
+
+        return switch playbackState {
+        case .idle: "Ready"
+        case .loading: "Connecting…"
+        case .playing: "Playing"
+        case .waiting: "Waiting for stream…"
+        case .paused: "Paused"
+        case .failed: "Playback failed"
+        }
+    }
+
     var sortedChannels: [Channel] {
         _ = settingsRevision
         return sortChannels(channels, by: AppSettings.channelsSortOrder)
@@ -87,10 +105,6 @@ final class AppModel {
 
     var recentChannels: [Channel] {
         recentChannelIDs.compactMap { id in channels.first { $0.id == id } }
-    }
-
-    var wantsPlayback: Bool {
-        player.wantsPlayback
     }
 
     var loginItemMessage: String? {
