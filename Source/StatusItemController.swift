@@ -9,6 +9,10 @@ final class StatusItemController: NSObject {
     private let menu = NSMenu()
     private var statusButton: NSButton?
     private var stationMenuItems: [NSMenuItem] = []
+    private var pulseTask: Task<Void, Never>?
+    private var pulsePhase: CGFloat = 0
+
+    private static let glyphName = "menubar-signal"
 
     init(model: AppModel) {
         self.model = model
@@ -42,10 +46,7 @@ final class StatusItemController: NSObject {
 
     private func updateStatusItem() {
         guard let button = statusItem.button else { return }
-        let symbolName = model.wantsPlayback ? "pause.fill" : "play.fill"
-        let image = NSImage(systemSymbolName: symbolName, accessibilityDescription: nil)
-        image?.isTemplate = true
-        button.image = image
+        applyStatusItemImage()
         button.imagePosition = .imageOnly
 
         let station = model.selectedChannel?.title
@@ -56,6 +57,89 @@ final class StatusItemController: NSObject {
         button.toolTip = [value, "Left click to play or pause", "Right click to open menu"].joined(separator: "\n")
         updateMenuStatus()
         updateMenuSelection()
+    }
+
+    private func applyStatusItemImage() {
+        statusItem.button?.image = statusItemImage
+        syncPulse()
+    }
+
+    private var statusItemImage: NSImage? {
+        switch model.playbackState {
+        case .loading, .waiting: pulseImage(phase: pulsePhase)
+        case .playing: statusItemImage(opacity: 1)
+        case .idle, .paused, .failed: statusItemImage(opacity: 0.6)
+        }
+    }
+
+    private func statusItemImage(opacity: CGFloat) -> NSImage? {
+        guard let artwork = NSImage(named: Self.glyphName) else { return nil }
+        return templateImage(size: artwork.size) { rect in
+            artwork.draw(in: rect, from: .zero, operation: .sourceOver, fraction: opacity)
+        }
+    }
+
+    /// Base glyph with a band of full-strength artwork travelling from the centre outwards,
+    /// so the waves fill and empty in one continuous sweep. The core stays lit throughout.
+    private func pulseImage(phase: CGFloat) -> NSImage? {
+        guard let artwork = NSImage(named: Self.glyphName) else { return nil }
+        return templateImage(size: artwork.size) { rect in
+            artwork.draw(in: rect, from: .zero, operation: .sourceOver, fraction: 0.5)
+            guard let context = NSGraphicsContext.current else { return }
+            let center = NSPoint(x: rect.midX, y: rect.midY)
+            let front = 0.05 + phase * 1.3
+            let trailing = max(0, front - 0.45)
+            let crest = max(min(1, front), trailing + 0.001)
+            let leading = max(min(1, front + 0.45), crest + 0.001)
+            let wave = NSGradient(colorsAndLocations: (.clear, trailing), (.white, crest), (.clear, leading))
+            context.saveGraphicsState()
+            context.cgContext.beginTransparencyLayer(auxiliaryInfo: nil)
+            artwork.draw(in: rect, from: .zero, operation: .sourceOver, fraction: 1)
+            context.cgContext.setBlendMode(.destinationIn)
+            wave?.draw(fromCenter: center, radius: 0, toCenter: center, radius: rect.width * 0.7, options: [])
+            context.cgContext.endTransparencyLayer()
+            context.restoreGraphicsState()
+
+            let core = rect.width * 0.13
+            context.saveGraphicsState()
+            NSBezierPath(ovalIn: NSRect(x: center.x - core, y: center.y - core, width: core * 2, height: core * 2)).addClip()
+            artwork.draw(in: rect, from: .zero, operation: .sourceOver, fraction: 1)
+            context.restoreGraphicsState()
+        }
+    }
+
+    private func templateImage(size: NSSize, draw: @escaping (NSRect) -> Void) -> NSImage {
+        let image = NSImage(size: size, flipped: false) { rect in
+            draw(rect)
+            return true
+        }
+        image.isTemplate = true
+        return image
+    }
+
+    private var pulses: Bool {
+        switch model.playbackState {
+        case .loading, .waiting: true
+        case .idle, .playing, .paused, .failed: false
+        }
+    }
+
+    private func syncPulse() {
+        guard pulses else {
+            pulseTask?.cancel()
+            pulseTask = nil
+            pulsePhase = 0
+            return
+        }
+        guard pulseTask == nil else { return }
+        pulseTask = Task { [weak self] in
+            while true {
+                guard (try? await Task.sleep(for: .milliseconds(40))) != nil, let self else { return }
+                guard !Task.isCancelled, pulses else { return }
+                pulsePhase = pulsePhase >= 1 ? 0 : pulsePhase + 0.04
+                statusItem.button?.image = pulseImage(phase: pulsePhase)
+            }
+        }
     }
 
     private var stateDescription: String {
@@ -94,7 +178,9 @@ final class StatusItemController: NSObject {
             Task { await model.start() }
         }
         rebuildMenu()
-        menu.popUp(positioning: nil, at: NSPoint(x: 0, y: button.bounds.maxY), in: button)
+        statusItem.menu = menu
+        button.performClick(nil)
+        statusItem.menu = nil
     }
 
     private func rebuildMenu() {
