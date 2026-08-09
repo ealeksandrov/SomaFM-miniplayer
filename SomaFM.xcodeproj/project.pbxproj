@@ -302,7 +302,7 @@
 		78307329B854D77174C8E1D6 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = waveform;
 				CODE_SIGN_ENTITLEMENTS = "Supporting-files/SomaFM.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -343,7 +343,7 @@
 		98B9A1F5A03579511D8BA17F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = waveform;
 				CODE_SIGN_ENTITLEMENTS = "Supporting-files/SomaFM.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
