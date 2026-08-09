@@ -11,6 +11,7 @@ enum UserDefaultsKey {
     static let recentChannelIDs = "SomaFM.RecentChannelIDs"
     static let showsRecentStations = "SomaFM.ShowsRecentStations"
     static let menuBarLeftClick = "SomaFM.MenuBarLeftClick"
+    static let didAnnounceLeftClick = "SomaFM.DidAnnounceLeftClick"
     static let settingsPane = "SomaFM.SettingsPane"
 }
 
@@ -53,8 +54,27 @@ enum AppSettings {
     }
 
     static var menuBarLeftClick: MenuBarClickAction {
-        MenuBarClickAction(rawValue: UserDefaults.standard.string(forKey: UserDefaultsKey.menuBarLeftClick) ?? "")
-            ?? .openMenu
+        get {
+            MenuBarClickAction(rawValue: UserDefaults.standard.string(forKey: UserDefaultsKey.menuBarLeftClick) ?? "")
+                ?? .openMenu
+        }
+        set {
+            UserDefaults.standard.set(newValue.rawValue, forKey: UserDefaultsKey.menuBarLeftClick)
+        }
+    }
+
+    static var hasChosenLeftClick: Bool {
+        UserDefaults.standard.string(forKey: UserDefaultsKey.menuBarLeftClick) != nil
+    }
+
+    /// A user who has played something before this build exists in defaults; a fresh install does not.
+    static var isUpgrade: Bool {
+        UserDefaults.standard.object(forKey: UserDefaultsKey.lastPlayedChannel) != nil
+    }
+
+    static var didAnnounceLeftClick: Bool {
+        get { UserDefaults.standard.bool(forKey: UserDefaultsKey.didAnnounceLeftClick) }
+        set { UserDefaults.standard.set(newValue, forKey: UserDefaultsKey.didAnnounceLeftClick) }
     }
 
     static var recentChannelIDs: [String] {

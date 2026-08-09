@@ -28,7 +28,29 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationDidFinishLaunching(_: Notification) {
         UNUserNotificationCenter.current().delegate = self
         statusItemController = StatusItemController(model: model)
+        announceLeftClickChange()
         Task { await model.start() }
+    }
+
+    /// The left click used to always play or pause. Existing installs are told once that it now
+    /// opens the menu, and can keep the old behaviour on the spot.
+    private func announceLeftClickChange() {
+        guard !AppSettings.didAnnounceLeftClick else { return }
+        AppSettings.didAnnounceLeftClick = true
+        guard AppSettings.isUpgrade, !AppSettings.hasChosenLeftClick else { return }
+
+        let alert = NSAlert()
+        alert.messageText = "Left-clicking the icon now opens the menu"
+        alert.informativeText = """
+        It used to play or pause. The menu has a play/pause button, and right-click still opens it.
+        You can change this any time in Settings.
+        """
+        alert.addButton(withTitle: "Open Menu")
+        alert.addButton(withTitle: "Play or Pause")
+
+        NSApp.activate(ignoringOtherApps: true)
+        AppSettings.menuBarLeftClick = alert.runModal() == .alertSecondButtonReturn ? .playPause : .openMenu
+        model.settingsDidChange()
     }
 
     func applicationDidBecomeActive(_: Notification) {
