@@ -1,0 +1,10 @@
+# SwiftFormat configuration
+--swiftversion 6.0
+--languagemode 6
+
+# Options
+--maxwidth 120
+
+# Disabled rules
+--disable hoistPatternLet
+--disable trailingCommas

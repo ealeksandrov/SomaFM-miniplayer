@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0900"
+   LastUpgradeVersion = "2660"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "558AD6AF1F82BDD1000013B1"
+               BlueprintIdentifier = "0D1FC45704526481C9D8404F"
                BuildableName = "SomaFM miniplayer.app"
                BlueprintName = "SomaFM"
                ReferencedContainer = "container:SomaFM.xcodeproj">
@@ -26,27 +26,33 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
-      <Testables>
-      </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "558AD6AF1F82BDD1000013B1"
+            BlueprintIdentifier = "0D1FC45704526481C9D8404F"
             BuildableName = "SomaFM miniplayer.app"
             BlueprintName = "SomaFM"
             ReferencedContainer = "container:SomaFM.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
-      <AdditionalOptions>
-      </AdditionalOptions>
+      <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "172CD325BF15BEB97269C4BC"
+               BuildableName = "SomaFMTests.xctest"
+               BlueprintName = "SomaFMTests"
+               ReferencedContainer = "container:SomaFM.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+      </Testables>
    </TestAction>
    <LaunchAction
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -57,14 +63,12 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "558AD6AF1F82BDD1000013B1"
+            BlueprintIdentifier = "0D1FC45704526481C9D8404F"
             BuildableName = "SomaFM miniplayer.app"
             BlueprintName = "SomaFM"
             ReferencedContainer = "container:SomaFM.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
-      <AdditionalOptions>
-      </AdditionalOptions>
    </LaunchAction>
    <ProfileAction
       buildConfiguration = "Release"
@@ -76,7 +80,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "558AD6AF1F82BDD1000013B1"
+            BlueprintIdentifier = "0D1FC45704526481C9D8404F"
             BuildableName = "SomaFM miniplayer.app"
             BlueprintName = "SomaFM"
             ReferencedContainer = "container:SomaFM.xcodeproj">

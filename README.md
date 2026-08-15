@@ -1,23 +1,31 @@
 # SomaFM miniplayer
 
-[![CI Status](http://img.shields.io/travis/ealeksandrov/SomaFM-miniplayer.svg)](https://travis-ci.org/ealeksandrov/SomaFM-miniplayer)
+[![CI](https://github.com/ealeksandrov/SomaFM-miniplayer/actions/workflows/test.yml/badge.svg)](https://github.com/ealeksandrov/SomaFM-miniplayer/actions/workflows/test.yml)
 [![Latest Release](https://img.shields.io/github/release/ealeksandrov/SomaFM-miniplayer.svg)](https://github.com/ealeksandrov/SomaFM-miniplayer/releases/latest)
 [![License](https://img.shields.io/github/license/ealeksandrov/SomaFM-miniplayer.svg)](LICENSE.md)
-![Platform](https://img.shields.io/badge/platform-macos-lightgrey.svg)
+![Platform](https://img.shields.io/badge/platform-macOS%2014+-blue.svg)
 
 ![Screenshot](01.jpg)
 
-This is unofficial player that gives you minimal, background playback of SomaFM channels.
+An unofficial, minimal menu-bar player for [SomaFM](https://somafm.com/).
 
 ## Installation
 
-* Download latest version (sandboxed) from [Mac App Store](https://itunes.apple.com/us/app/somafm-miniplayer/id1303140142?mt=12&at=1000lHGx);
-* Download dmg (non-sandboxed) from [releases page](https://github.com/ealeksandrov/SomaFM-miniplayer/releases/latest);
-* Or clone this repo and build it from source. Sandboxing is turned **on** by default, remember to turn it off if you need media keys support.
+[<img src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-mac-app-store/black/en-us" alt="Download on the Mac App Store" height="40">](https://apps.apple.com/app/id1303140142)
 
-### Difference between versions
+Also available, signed and notarized, from [GitHub Releases](https://github.com/ealeksandrov/SomaFM-miniplayer/releases/latest).
 
-In sandboxed (Mac App Store) version Mac Media Keys (⏪⏯⏩) are not supported.
+## Usage
+
+- Left-click the status item to open the menu, or switch it to play/pause in Settings.
+- Right-click, Control-click, or Option-click always opens the menu.
+- The menu header shows the station and current track, with a play/pause button beside them.
+- Click the current track to copy it or search with the action selected in Settings.
+- Settings controls launch playback, notifications, the left-click action, station sorting, recent stations, the track action, and Start at Login.
+
+## Building
+
+Open `SomaFM.xcodeproj` in Xcode 26 or later and run the `SomaFM` scheme. The project has no third-party dependencies or bootstrap step.
 
 ## Author
 
@@ -25,4 +33,4 @@ Created and maintained by Evgeny Aleksandrov ([@ealeksandrov](https://twitter.co
 
 ## License
 
-`SomaFM miniplayer` is available under the MIT license. See the [LICENSE.md](LICENSE.md) file for more info.
+SomaFM miniplayer is available under the MIT license. See [LICENSE.md](LICENSE.md).
