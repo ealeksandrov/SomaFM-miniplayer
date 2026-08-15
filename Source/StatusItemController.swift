@@ -292,7 +292,7 @@ private extension StatusItemController {
         case .copy:
             NSPasteboard.general.clearContents()
             NSPasteboard.general.setString(track, forType: .string)
-        case .google, .youtube, .appleMusic:
+        case .google, .youtube, .appleMusic, .spotify:
             guard let url = AppSettings.trackAction.url(for: track) else { return }
             NSWorkspace.shared.open(url)
         }

@@ -39,6 +39,7 @@ enum TrackAction: String, CaseIterable, Identifiable {
     case google
     case youtube
     case appleMusic
+    case spotify
 
     var id: String {
         rawValue
@@ -50,6 +51,7 @@ enum TrackAction: String, CaseIterable, Identifiable {
         case .google: "Search with Google"
         case .youtube: "Search with YouTube"
         case .appleMusic: "Search with Apple Music"
+        case .spotify: "Search with Spotify"
         }
     }
 
@@ -68,6 +70,10 @@ enum TrackAction: String, CaseIterable, Identifiable {
         case .appleMusic:
             components = URLComponents(string: "https://music.apple.com/us/search")!
             components.queryItems = [URLQueryItem(name: "term", value: track)]
+        case .spotify:
+            // The web player reads the query from the path, so slashes have to be escaped too.
+            let query = track.addingPercentEncoding(withAllowedCharacters: .alphanumerics) ?? track
+            return URL(string: "https://open.spotify.com/search/\(query)")
         }
 
         return components.url

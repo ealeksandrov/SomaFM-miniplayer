@@ -94,6 +94,8 @@ struct SomaFMTests {
             #expect(url.absoluteString.contains("Massive%20Attack"))
             #expect(!url.absoluteString.contains(" "))
         }
+
+        #expect(TrackAction.spotify.url(for: "AC/DC")?.absoluteString == "https://open.spotify.com/search/AC%2FDC")
     }
 
     @Test @MainActor
