@@ -229,6 +229,7 @@ final class AppModel {
                 }
             } else if service.status != .notRegistered {
                 try service.unregister()
+                AppSettings.didMigrateLoginItem = true
             }
         } catch {
             loginItemError = error.localizedDescription
@@ -268,8 +269,14 @@ final class AppModel {
         AppSettings.recentChannelIDs = recentChannelIDs
 
         if let channel = resolveChannel(in: newChannels, savedID: selectedChannelID) {
+            let resolvedDifferentChannel = channel.id != selectedChannelID
             selectedChannelID = channel.id
             AppSettings.lastPlayedChannelID = channel.id
+            // A refreshed catalog can drop the station we are streaming; follow it here,
+            // otherwise the menu and the audio disagree.
+            if resolvedDifferentChannel, player.wantsPlayback {
+                _ = player.play(channel)
+            }
         }
 
         if playOnLaunchGate.consume(hasChannels: !newChannels.isEmpty) {

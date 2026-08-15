@@ -60,9 +60,7 @@ final class RadioPlayer: NSObject {
         activateRemoteCommands()
 
         currentTrack = nil
-        if currentChannel?.id != channel.id {
-            trackChanged?(nil)
-        }
+        trackChanged?(nil)
         currentChannel = channel
         installCurrentChannel()
         return true
