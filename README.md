@@ -11,8 +11,9 @@ An unofficial, minimal menu-bar player for [SomaFM](https://somafm.com/).
 
 ## Installation
 
-- Install the sandboxed app from the [Mac App Store](https://itunes.apple.com/us/app/somafm-miniplayer/id1303140142?mt=12&at=1000lHGx).
-- Or download the signed and notarized app from [GitHub Releases](https://github.com/ealeksandrov/SomaFM-miniplayer/releases/latest).
+[<img src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-mac-app-store/black/en-us" alt="Download on the Mac App Store" height="40">](https://apps.apple.com/app/id1303140142)
+
+Also available, signed and notarized, from [GitHub Releases](https://github.com/ealeksandrov/SomaFM-miniplayer/releases/latest).
 
 ## Usage
 
