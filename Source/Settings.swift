@@ -12,6 +12,7 @@ enum UserDefaultsKey {
     static let showsRecentStations = "SomaFM.ShowsRecentStations"
     static let menuBarLeftClick = "SomaFM.MenuBarLeftClick"
     static let didAnnounceLeftClick = "SomaFM.DidAnnounceLeftClick"
+    static let didMigrateLoginItem = "SomaFM.DidMigrateLoginItem"
     static let settingsPane = "SomaFM.SettingsPane"
 }
 
@@ -75,6 +76,11 @@ enum AppSettings {
     static var didAnnounceLeftClick: Bool {
         get { UserDefaults.standard.bool(forKey: UserDefaultsKey.didAnnounceLeftClick) }
         set { UserDefaults.standard.set(newValue, forKey: UserDefaultsKey.didAnnounceLeftClick) }
+    }
+
+    static var didMigrateLoginItem: Bool {
+        get { UserDefaults.standard.bool(forKey: UserDefaultsKey.didMigrateLoginItem) }
+        set { UserDefaults.standard.set(newValue, forKey: UserDefaultsKey.didMigrateLoginItem) }
     }
 
     static var recentChannelIDs: [String] {
