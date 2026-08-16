@@ -71,6 +71,14 @@ struct SettingsView: View {
             Form {
                 Section("SomaFM miniplayer") {
                     LabeledContent("Version", value: versionText)
+                    LabeledContent("Privacy") {
+                        Link(
+                            "Privacy Policy",
+                            destination: URL(
+                                string: "https://github.com/ealeksandrov/SomaFM-miniplayer/blob/master/PRIVACY.md"
+                            )!
+                        )
+                    }
                     LabeledContent("Source code") {
                         Link(
                             "GitHub repository",
