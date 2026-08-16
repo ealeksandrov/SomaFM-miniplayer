@@ -13,7 +13,7 @@ An unofficial, minimal menu-bar player for [SomaFM](https://somafm.com/).
 
 [<img src="https://toolbox.marketingtools.apple.com/api/v2/badges/download-on-the-mac-app-store/black/en-us" alt="Download on the Mac App Store" height="40">](https://apps.apple.com/app/id1303140142)
 
-Also available, signed and notarized, from [GitHub Releases](https://github.com/ealeksandrov/SomaFM-miniplayer/releases/latest).
+Or download the latest `dmg` from [GitHub Releases](https://github.com/ealeksandrov/SomaFM-miniplayer/releases/latest).
 
 ## Usage
 
@@ -21,7 +21,7 @@ Also available, signed and notarized, from [GitHub Releases](https://github.com/
 - Right-click, Control-click, or Option-click always opens the menu.
 - The menu header shows the station and current track, with a play/pause button beside them.
 - Click the current track to copy it or search with the action selected in Settings.
-- Settings controls launch playback, notifications, the left-click action, station sorting, recent stations, the track action, and Start at Login.
+- Settings covers playback (start at login, play on launch, track notifications) and behavior (left-click action, track click action, station sorting, recent stations).
 
 ## Building
 
@@ -33,4 +33,4 @@ Created and maintained by Evgeny Aleksandrov ([@ealeksandrov](https://twitter.co
 
 ## License
 
-SomaFM miniplayer is available under the MIT license. See [LICENSE.md](LICENSE.md).
+SomaFM miniplayer is available under the MIT license. See [LICENSE.md](LICENSE.md) and the [privacy policy](PRIVACY.md).
